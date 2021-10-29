@@ -18,7 +18,7 @@ const Homepage = () => {
 export default Homepage;
 
 const Title = styled.h1`
-  margin-top: 100px;
+  margin-top: 75px;
   width: max-content;
   margin-right: auto;
   margin-left: auto;
@@ -27,7 +27,7 @@ const Title = styled.h1`
   font-size: 10vw;
 
   /**
-  * Fixed sizes for desktop
+  * Fixed title sizes for desktop
   */
   @media only screen and (min-width: 768px) {
     font-size: 4em;
@@ -39,15 +39,15 @@ const Wrapper = styled.section`
   flex-flow: row wrap;
   /**
   * Fit components in wrapper from their sizes (grid of 4 buttons)
-  * Total width   = width * 2 + margin * 4
-  * Mobile : 80vw =   30  * 2 +   5    * 4
-  * Desktop : 600px = 150 * 2 +   75   * 4
+  * Total width   =   width * 2 +   margin * 4
+  * Mobile : 80vw =   30vw  * 2 +   5vw    * 4
+  * Desktop : 600px = 150px * 2 +   75px   * 4
   */
   width: 80vw;
   margin-left: auto;
   margin-right: auto;
   background-color: #d9ff00;
-  transform: translateY(10vh);
+  transform: translateY(2vh);
 
   /**
   * Fixed sizes for desktop
@@ -69,13 +69,13 @@ const Tile = styled.button`
   font-size: 5vw;
 
   /**
-  * Fixed sizes for desktop
+  * Fixed buttons sizes for desktop
   */
   @media only screen and (min-width: 768px) {
-    font-size: 2em;
+    font-size: 1.5em;
     width: 150px;
     height: 200px;
-    margin: 20px;
+    margin: 30px;
     margin-left: 75px;
     margin-right: 75px;
   }
