@@ -13,6 +13,8 @@ const Container = styled.div`
     background-color: rebeccapurple;
     width: 200px;
     height: 150px;
+    border: 2px solid red
+
 `;
 
 export default Succes
