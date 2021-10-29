@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import map from "../../ressources/img/map.png";
 
 const Game = () => {
   return (
@@ -18,7 +19,8 @@ const Game = () => {
 export default Game;
 
 const GameContainer = styled.section`
-  background-color: yellow;
+  background-image: url(${map});
+  background-size: cover;
   position: relative;
   width: 100%;
   height: 100vh;
