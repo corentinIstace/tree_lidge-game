@@ -1,4 +1,4 @@
-import Logpage from "./components/Logpage";
+import Logpage from "../containers/Logpage";
 import UserPage from "../containers/UserPage";
 
 function App() {

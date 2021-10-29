@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import Login from "./Login";
-import Register from "./Register";
-import MySvg from "../../ressources/img/tree-lidge-logo-3.svg";
+import Login from "../client/components/Login";
+import Register from "../client/components/Register";
+import MySvg from "../ressources/img/tree-lidge-logo-3.svg";
 
 const Logpage = () => {
   const [btnSwitch, setBtnSwitch] = useState(true);
