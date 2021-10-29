@@ -4,40 +4,55 @@ import Achievments from '../client/components/Achievments';
 import Succes from '../client/components/Succes';
 import UserAchievments from '../client/components/UserAchievments';
 import UserName from '../client/components/UserName';
+import MySvg from "../ressources/img/tree-lidge-logo-3.svg"
 
 const UserPage = () => {
-    return (
-        <>
-        <Title>
-            <h1>Tree Lidge</h1>
-        </Title>
+    return (    
         <Container>
-            <UserName></UserName>
-            <Achievments></Achievments>
-            <Succes></Succes>
-            <UserAchievments></UserAchievments>
+            <Top>
+                <UserName></UserName>
+            </Top>
+            <Middle>
+                <Achievments></Achievments>
+                <Logo src={MySvg} alt="logo" />
+                <Succes></Succes>
+            </Middle>
+            <Footer>
+                <UserAchievments></UserAchievments>
+            </Footer>
         </Container> 
-        </>
     )
 }
 
 const Container = styled.div`
     background-color: #111824;
     display: flex;
+    flex-direction: column;
     margin: 0;
     width: 100%;
-    height: 100vw;
+    height: 50vw;
     `;
 
-const Title = styled.h1`
-    background-color: #111824;
-    text-align: center;
-    font-size: 1.5em;
-    color: green;
-    font-style: italic;
-    margin: 0;
-        h1{
-            margin: 0;
-        }
+const Top = styled.div`
+    display: flex;
+    justify-content: center;
+    margin: 25px 0px;
+    `;
+
+const Middle = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 50px;
+    `;
+
+const Logo = styled.img`
+    width: 20%;
 `;
+const Footer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin: 25px 0px;
+`;
+
 export default UserPage;
