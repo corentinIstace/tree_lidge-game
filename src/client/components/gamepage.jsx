@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import map from "../../ressources/img/map.png";
 
