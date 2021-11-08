@@ -1,19 +1,17 @@
 import React from "react";
 import styled from "styled-components";
 
-const Homepage = () => {
-    return (
-        <>
-            <Title>Tree Lidge</Title>
-            <Wrapper>
-                <Tile>Leader board</Tile>
-                <Tile>Profile</Tile>
-                <Tile>Success</Tile>
-                <Tile>Challenges</Tile>
-            </Wrapper>
-        </>
-    );
-};
+const Homepage = () => (
+    <>
+        <Title>{"Tree Lidge"}</Title>
+        <Wrapper>
+            <Tile>{"Leader board"}</Tile>
+            <Tile>{"Profile"}</Tile>
+            <Tile>{"Success"}</Tile>
+            <Tile>{"Challenges"}</Tile>
+        </Wrapper>
+    </>
+);
 
 export default Homepage;
 

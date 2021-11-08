@@ -6,11 +6,11 @@ import UserPage from "../containers/UserPage";
 
 function App() {
     return (
-        <div className="App">
+        <div className={"App"}>
             <Homepage />
             <Game />
-            <Logpage></Logpage>
-            <UserPage></UserPage>
+            <Logpage />
+            <UserPage />
         </div>
     );
 }

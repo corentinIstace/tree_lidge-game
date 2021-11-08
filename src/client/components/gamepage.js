@@ -2,20 +2,18 @@ import React from "react";
 import styled from "styled-components";
 import map from "../../ressources/img/map.png";
 
-const Game = () => {
-    return (
-        <GameContainer>
-            <Nav>
-                <Button>Menu</Button>
-                <Button>Logout</Button>
-            </Nav>
-            <Counts>
-                <p>Trees : 40</p>
-                <p>Leaves : 5000</p>
-            </Counts>
-        </GameContainer>
-    );
-};
+const Game = () => (
+    <GameContainer>
+        <Nav>
+            <Button>{"Menu"}</Button>
+            <Button>{"Logout"}</Button>
+        </Nav>
+        <Counts>
+            <p>{"Trees : 40"}</p>
+            <p>{"Leaves : 5000"}</p>
+        </Counts>
+    </GameContainer>
+);
 
 export default Game;
 

@@ -1,13 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const UserAchievments = () => {
-    return (
-        <Container>
-            <p>USER ACHIEVMENTS</p>
-        </Container>
-    )
-}
+const UserAchievments = () => (
+    <Container>
+        <p>{"USER ACHIEVMENTS"}</p>
+    </Container>
+);
 
 const Container = styled.div`
     background-color: rebeccapurple;
