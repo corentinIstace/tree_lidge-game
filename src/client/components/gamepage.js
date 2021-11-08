@@ -1,9 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import map from "../../ressources/img/map.png";
+import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 
 const Game = () => (
     <GameContainer>
+        {/* <Map id={"map"}> */}
+        <MapContainer
+            center={[51.505, -0.09]}
+            zoom={13}
+            scrollWheelZoom={false}>
+            <TileLayer
+                attribution={
+                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                }
+                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+            />
+            <Marker position={[51.505, -0.09]}>
+                <Popup>
+                    {"A pretty CSS3 popup. "}
+                    <br />
+                    {" Easily customizable."}
+                </Popup>
+            </Marker>
+        </MapContainer>
+        {/* </Map> */}
         <Nav>
             <Button>{"Menu"}</Button>
             <Button>{"Logout"}</Button>
@@ -18,12 +38,14 @@ const Game = () => (
 export default Game;
 
 const GameContainer = styled.section`
-    background-image: url(${map});
-    background-size: cover;
     position: relative;
     width: 100%;
     height: 100vh;
 `;
+
+/* const Map = styled.div`
+    height: 400px;
+`; */
 
 const Nav = styled.nav`
     display: flex;
