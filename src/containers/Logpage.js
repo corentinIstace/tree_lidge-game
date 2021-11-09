@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Login from "../client/components/Login";
 import Register from "../client/components/Register";
 import MySvg from "../ressources/img/tree-lidge-logo-3.svg";
+// import {BrowserRouter as Router} from "react-router-dom"
 
 const Logpage = () => {
     const [btnSwitch, setBtnSwitch] = useState(true);

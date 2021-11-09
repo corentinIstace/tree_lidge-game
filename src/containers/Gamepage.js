@@ -1,8 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import map from "../../ressources/img/map.png";
+import map from "../ressources/img/map.png";
 
-const Game = () => (
+const Gamepage = () => (
     <GameContainer>
         <Nav>
             <Button>{"Menu"}</Button>
@@ -15,7 +15,7 @@ const Game = () => (
     </GameContainer>
 );
 
-export default Game;
+export default Gamepage;
 
 const GameContainer = styled.section`
     background-image: url(${map});
