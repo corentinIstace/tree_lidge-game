@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
-import SomePointers from "./SomePointers";
+import SomePointers from "../client/components/SomePointers";
 
 const initialCoordinate = [50.6382, 5.5683]; // Center of Liège
 const mapLimits = [
