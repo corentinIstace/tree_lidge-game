@@ -1,11 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import {
-    MapContainer,
-    TileLayer,
-    Marker,
-    Popup /* Rectangle */,
-} from "react-leaflet";
+import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
 import SomePointers from "./SomePointers";
 
 const initialCoordinate = [50.6382, 5.5683]; // Center of Liège
@@ -37,13 +32,6 @@ const Game = () => (
                 }
                 url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
             />
-            <Marker position={initialCoordinate}>
-                <Popup>
-                    {"A pretty CSS3 popup. "}
-                    <br />
-                    {" Easily customizable."}
-                </Popup>
-            </Marker>
             <SomePointers />
             {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
         </MapContainer>
