@@ -2,12 +2,19 @@ import React from "react";
 import styled from "styled-components";
 import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
 
+const initialCoordinate = [50.6382, 5.5683]; // Center of Liège
+const mapHeight = "80vh";
+
 const Game = () => (
     <GameContainer>
-        {/* <Map id={"map"}> */}
+        <Nav>
+            <Button>{"Menu"}</Button>
+            <Button>{"Logout"}</Button>
+        </Nav>
         <MapContainer
-            center={[51.505, -0.09]}
-            zoom={13}
+            style={{height: mapHeight}} // Force leaflet map height
+            center={initialCoordinate}
+            zoom={15}
             scrollWheelZoom={false}>
             <TileLayer
                 attribution={
@@ -15,7 +22,7 @@ const Game = () => (
                 }
                 url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
             />
-            <Marker position={[51.505, -0.09]}>
+            <Marker position={initialCoordinate}>
                 <Popup>
                     {"A pretty CSS3 popup. "}
                     <br />
@@ -23,11 +30,6 @@ const Game = () => (
                 </Popup>
             </Marker>
         </MapContainer>
-        {/* </Map> */}
-        <Nav>
-            <Button>{"Menu"}</Button>
-            <Button>{"Logout"}</Button>
-        </Nav>
         <Counts>
             <p>{"Trees : 40"}</p>
             <p>{"Leaves : 5000"}</p>
@@ -40,12 +42,8 @@ export default Game;
 const GameContainer = styled.section`
     position: relative;
     width: 100%;
-    height: 100vh;
+    background-color: yellow;
 `;
-
-/* const Map = styled.div`
-    height: 400px;
-`; */
 
 const Nav = styled.nav`
     display: flex;
