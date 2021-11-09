@@ -54,7 +54,11 @@ const Nav = styled.nav`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
+    position: absolute;
+    top: 10px;
+    left: 5vw;
+    z-index: 999;
 `;
 
 const Button = styled.button`
