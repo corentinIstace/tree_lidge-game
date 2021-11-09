@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Achievments from "../client/components/Achievments";
+import Achievements from "../client/components/Achievements";
 import Succes from "../client/components/Succes";
 import UserAchievments from "../client/components/UserAchievments";
 import UserName from "../client/components/UserName";
@@ -12,7 +12,7 @@ const UserPage = () => (
             <UserName />
         </Top>
         <Middle>
-            <Achievments />
+            <Achievements />
             <Logo src={MySvg} alt={"logo"} />
             <Succes />
         </Middle>

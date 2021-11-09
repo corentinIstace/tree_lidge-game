@@ -12,7 +12,7 @@ const minZoomLimit = 14;
 const maxZoomLimit = 18;
 const mapHeight = "80vh";
 
-const Game = () => (
+const Gamepage = () => (
     <GameContainer>
         <Nav>
             <Button>{"Menu"}</Button>
@@ -42,7 +42,7 @@ const Game = () => (
     </GameContainer>
 );
 
-export default Game;
+export default Gamepage;
 
 const GameContainer = styled.section`
     position: relative;
