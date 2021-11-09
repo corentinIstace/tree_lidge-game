@@ -3,25 +3,17 @@ import Logpage from "../containers/Logpage";
 import Homepage from "../containers/Homepage";
 import Gamepage from "../containers/Gamepage";
 import UserPage from "../containers/UserPage";
+import Error from "./components/Error";
 import {Routes, Route} from "react-router-dom";
 
 function App() {
     return (
         <Routes>
-            <div className={"App"}>
-                <Route path={"/"} exact>
-                    <Logpage />
-                </Route>
-                <Route path={"/gamepage"}>
-                    <Gamepage />
-                </Route>
-                <Route>
-                    <Homepage path={"/homepage"} />
-                </Route>
-                <Route>
-                    <UserPage path={"/userpage"} />
-                </Route>
-            </div>
+            <Route path={"/"} exact element={<Logpage />} />
+            <Route path={"/gamepage"} element={<Gamepage />} />
+            <Route path={"/homepage"} element={<Homepage />} />
+            <Route path={"/userpage"} element={<UserPage />} />
+            <Route element={<Error />} />
         </Routes>
     );
 }
