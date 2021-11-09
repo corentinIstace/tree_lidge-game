@@ -1,11 +1,9 @@
-/* becodeorg/mwenbwa
- *
- * /webpack.config.js - Webpack configuration
- *
- * coded by leny@BeCode
- * started at 18/05/2020
- */
-
 module.exports = {
     extends: "@becode",
+    parser: "@babel/eslint-parser",
+    parserOptions: {
+        babelOptions: {
+            presets: ["@babel/preset-react"],
+        },
+    },
 };

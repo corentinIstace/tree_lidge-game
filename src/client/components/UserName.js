@@ -1,13 +1,11 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-const UserName = () => {
-    return (
-        <Container>
-            <p>NAME</p>
-        </Container>
-    )
-}
+const UserName = () => (
+    <Container>
+        <p>{"hello"}</p>
+    </Container>
+);
 
 const Container = styled.div`
     background-color: grey;
@@ -15,4 +13,4 @@ const Container = styled.div`
     width: 200px;
     height: 150px;
 `;
-export default UserName
+export default UserName;

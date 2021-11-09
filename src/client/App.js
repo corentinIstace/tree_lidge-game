@@ -1,19 +1,18 @@
-
 import React from "react";
-import Homepage from "./components/homepage";
-import Game from "./components/gamepage";
 import Logpage from "../containers/Logpage";
+import Homepage from "../containers/Homepage";
+import Gamepage from "../containers/Gamepage";
 import UserPage from "../containers/UserPage";
 
 function App() {
-  return (
-    <div className="App">
-      <Homepage />
-      <Game />
-      <Logpage></Logpage>
-      <UserPage></UserPage>
-    </div>
-  );
+    return (
+        <div className={"App"}>
+            <Homepage />
+            <Gamepage />
+            <Logpage />
+            <UserPage />
+        </div>
+    );
 }
 
 export default App;
