@@ -1,9 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import {MapContainer, TileLayer, Marker, Popup} from "react-leaflet";
+import {MapContainer, TileLayer, Marker, Popup, Rectangle} from "react-leaflet";
 import SomePointers from "./SomePointers";
 
 const initialCoordinate = [50.6382, 5.5683]; // Center of Liège
+const mapLimits = [
+    [50.5722, 5.4983],
+    [50.7022, 5.68683],
+];
 const mapHeight = "80vh";
 
 const Game = () => (
@@ -31,6 +35,7 @@ const Game = () => (
                 </Popup>
             </Marker>
             <SomePointers />
+            <Rectangle bounds={mapLimits} />
         </MapContainer>
         <Counts>
             <p>{"Trees : 40"}</p>
