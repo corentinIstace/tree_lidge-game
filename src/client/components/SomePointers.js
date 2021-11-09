@@ -3,6 +3,9 @@ import React from "react";
 import {v4 as uuidv4} from "uuid";
 import Trees from "../../ressources/arbustum.json";
 import {Marker, Popup} from "react-leaflet";
+/**
+ * Loop over trees data and generate map markups
+ */
 const SomePointers = () => (
     <>
         {Array.from(Trees)
