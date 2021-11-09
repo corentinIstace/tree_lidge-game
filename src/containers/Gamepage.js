@@ -1,6 +1,16 @@
 import React from "react";
 import styled from "styled-components";
-import map from "../ressources/img/map.png";
+import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
+import SomePointers from "../client/components/SomePointers";
+
+const initialCoordinate = [50.6382, 5.5683]; // Center of Liège
+const mapLimits = [
+    [50.5722, 5.4983],
+    [50.7022, 5.68683],
+];
+const minZoomLimit = 14;
+const maxZoomLimit = 18;
+const mapHeight = "80vh";
 
 const Gamepage = () => (
     <GameContainer>
@@ -8,6 +18,23 @@ const Gamepage = () => (
             <Button>{"Menu"}</Button>
             <Button>{"Logout"}</Button>
         </Nav>
+        <MapContainer
+            style={{height: mapHeight}} // Force leaflet map height
+            center={initialCoordinate}
+            zoom={15}
+            scrollWheelZoom={false}
+            maxBounds={mapLimits}
+            minZoom={minZoomLimit}
+            maxZoom={maxZoomLimit}>
+            <TileLayer
+                attribution={
+                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                }
+                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+            />
+            <SomePointers />
+            {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
+        </MapContainer>
         <Counts>
             <p>{"Trees : 40"}</p>
             <p>{"Leaves : 5000"}</p>
@@ -18,18 +45,20 @@ const Gamepage = () => (
 export default Gamepage;
 
 const GameContainer = styled.section`
-    background-image: url(${map});
-    background-size: cover;
     position: relative;
     width: 100%;
-    height: 100vh;
+    background-color: yellow;
 `;
 
 const Nav = styled.nav`
     display: flex;
     flex-flow: row nowrap;
     justify-content: space-between;
-    width: 100%;
+    width: 90%;
+    position: absolute;
+    top: 10px;
+    left: 5vw;
+    z-index: 999;
 `;
 
 const Button = styled.button`
