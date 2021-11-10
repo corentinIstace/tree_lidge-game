@@ -107,4 +107,5 @@ const Counts = styled.article`
     right: 2vh;
     padding: 20px;
     width: 35vw;
+    z-index: 999;
 `;
