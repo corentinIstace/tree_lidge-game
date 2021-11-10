@@ -11,10 +11,10 @@ const SomePointers = () => (
         {Array.from(Trees)
             .slice(9000, 10000)
             .map(tree => {
-                const id = uuidv4();
                 if (!tree.geoloc || !tree.geoloc.lon || !tree.geoloc.lat) {
                     return <div />;
                 }
+                const id = uuidv4();
                 return (
                     <Marker key={String(id)} position={tree.geoloc}>
                         <Popup>{String(id)}</Popup>
