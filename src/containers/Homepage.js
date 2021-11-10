@@ -3,18 +3,23 @@ import styled from "styled-components";
 
 const Homepage = () => (
     <>
-        <Title>{"Tree Lidge"}</Title>
-        <Wrapper>
-            <Tile>{"Leader board"}</Tile>
-            <Tile>{"Profile"}</Tile>
-            <Tile>{"Success"}</Tile>
-            <Tile>{"Challenges"}</Tile>
-        </Wrapper>
+        <Page>
+            <Title>{"Tree Lidge"}</Title>
+            <Wrapper>
+                <Tile>{"Leader board"}</Tile>
+                <Tile>{"Profile"}</Tile>
+                <Tile>{"Success"}</Tile>
+                <Tile>{"Challenges"}</Tile>
+            </Wrapper>
+        </Page>
     </>
 );
 
 export default Homepage;
 
+const Page = styled.div`
+    background-image: url(./img/foret.png);
+`;
 const Title = styled.h1`
     margin-top: 75px;
     width: max-content;
@@ -44,7 +49,7 @@ const Wrapper = styled.section`
     width: 80vw;
     margin-left: auto;
     margin-right: auto;
-    background-color: #d9ff00;
+    background-color: #111824;
     transform: translateY(2vh);
 
     /**
