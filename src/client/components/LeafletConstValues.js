@@ -2,7 +2,7 @@
  * Coordinate of Liège center.
  * Give center position of the map.
  */
-const initialCoordinate = [50.6382, 5.5683];
+const initialCenterCoordinates = [50.6382, 5.5683];
 
 /**
  * Limit of the map. Player is pushed back into the limits if try to go out these bounds.
@@ -18,4 +18,4 @@ const mapLimits = [
 const minZoomLimit = 14;
 const maxZoomLimit = 18;
 
-export {initialCoordinate, mapLimits, minZoomLimit, maxZoomLimit};
+export {initialCenterCoordinates, mapLimits, minZoomLimit, maxZoomLimit};

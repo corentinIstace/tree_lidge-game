@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
+import {MapContainer, TileLayer, Rectangle} from "react-leaflet";
 import SomePointers from "../client/components/SomePointers";
 import ZoomHandler from "../client/components/LeafletZoomHandler";
-import CenterLocatorHandler from "../client/components/LeafletCenterHandler";
-
+import CenterLocatorHandler from "../client/components/LeafletCenterViewHandler";
 import {
-    initialCoordinate,
+    initialCenterCoordinates,
     mapLimits,
     minZoomLimit,
     maxZoomLimit,
@@ -18,9 +17,16 @@ import {
  */
 const mapHeight = "100vh";
 
+// These values are necessary for the initial display, then will be overwritten by whenCreated of GameContainer
+const initialBounds = [
+    [50.64845366378443, 5.5523406982421875],
+    [50.628040512635025, 5.534191131591798],
+];
+
 const Gamepage = () => {
     const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
-    const [mapCenter, setMapCenter] = useState(initialCoordinate);
+    const [mapCenter, setMapCenter] = useState(initialCenterCoordinates);
+    const [boundsView, setBoundsView] = useState(null);
 
     return (
         <GameContainer>
@@ -33,6 +39,10 @@ const Gamepage = () => {
                 center={mapCenter}
                 zoom={zoomLevel}
                 scrollWheelZoom={false}
+                whenCreated={map => {
+                    // Update bounds when map is loaded
+                    setBoundsView(map.getBounds());
+                }}
                 maxBounds={mapLimits}
                 minZoom={minZoomLimit}
                 maxZoom={maxZoomLimit}>
@@ -43,6 +53,11 @@ const Gamepage = () => {
                 <CenterLocatorHandler
                     mapCenter={mapCenter}
                     setMapCenter={setMapCenter}
+                    setBoundsView={setBoundsView}
+                />
+                <Rectangle
+                    center={mapCenter}
+                    bounds={boundsView || initialBounds}
                 />
                 <TileLayer
                     attribution={
