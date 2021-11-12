@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
 import SomePointers from "../client/components/SomePointers";
+import ZoomHandler from "../client/components/LeafletZoomHandler";
 
 /**
  * Coordinate of Liège center.
@@ -29,36 +30,43 @@ const maxZoomLimit = 18;
  */
 const mapHeight = "80vh";
 
-const Gamepage = () => (
-    <GameContainer>
-        <Nav>
-            <Button>{"Menu"}</Button>
-            <Button>{"Logout"}</Button>
-        </Nav>
-        <MapContainer
-            style={{height: mapHeight}}
-            center={initialCoordinate}
-            zoom={15}
-            scrollWheelZoom={false}
-            maxBounds={mapLimits}
-            minZoom={minZoomLimit}
-            maxZoom={maxZoomLimit}>
-            <TileLayer
-                attribution={
-                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }
-                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-            />
-            <SomePointers />
-            {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
-        </MapContainer>
-        <Counts>
-            <p>{"Trees : 40"}</p>
-            <p>{"Leaves : 5000"}</p>
-        </Counts>
-    </GameContainer>
-);
+const Gamepage = () => {
+    const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
 
+    return (
+        <GameContainer>
+            <Nav>
+                <Button>{"Menu"}</Button>
+                <Button>{"Logout"}</Button>
+            </Nav>
+            <MapContainer
+                style={{height: mapHeight}}
+                center={initialCoordinate}
+                zoom={zoomLevel}
+                scrollWheelZoom={false}
+                maxBounds={mapLimits}
+                minZoom={minZoomLimit}
+                maxZoom={maxZoomLimit}>
+                <ZoomHandler
+                    zoomLevel={zoomLevel}
+                    setZoomLevel={setZoomLevel}
+                />
+                <TileLayer
+                    attribution={
+                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }
+                    url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+                />
+                <SomePointers />
+                {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
+            </MapContainer>
+            <Counts>
+                <p>{"Trees : 40"}</p>
+                <p>{"Leaves : 5000"}</p>
+            </Counts>
+        </GameContainer>
+    );
+};
 export default Gamepage;
 
 /**
