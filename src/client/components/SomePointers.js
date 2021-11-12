@@ -9,7 +9,7 @@ import {Marker, Popup} from "react-leaflet";
 const SomePointers = () => (
     <>
         {Array.from(Trees)
-            .slice(9000, 10000)
+            .slice(0, 100)
             .map(tree => {
                 if (!tree.geoloc || !tree.geoloc.lon || !tree.geoloc.lat) {
                     return <div />;

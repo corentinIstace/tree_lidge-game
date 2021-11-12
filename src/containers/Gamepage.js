@@ -15,7 +15,7 @@ import {
  * Height of the map display.
  * Necessary value to display the map.
  */
-const mapHeight = "80vh";
+const mapHeight = "100vh";
 
 const Gamepage = () => {
     const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
