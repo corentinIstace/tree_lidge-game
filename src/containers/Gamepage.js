@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
 import SomePointers from "../client/components/SomePointers";
 import ZoomHandler from "../client/components/LeafletZoomHandler";
+import CenterLocatorHandler from "../client/components/LeafletCenterHandler";
 
 import {
     initialCoordinate,
@@ -19,6 +20,7 @@ const mapHeight = "100vh";
 
 const Gamepage = () => {
     const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
+    const [mapCenter, setMapCenter] = useState(initialCoordinate);
 
     return (
         <GameContainer>
@@ -28,7 +30,7 @@ const Gamepage = () => {
             </Nav>
             <MapContainer
                 style={{height: mapHeight}}
-                center={initialCoordinate}
+                center={mapCenter}
                 zoom={zoomLevel}
                 scrollWheelZoom={false}
                 maxBounds={mapLimits}
@@ -37,6 +39,10 @@ const Gamepage = () => {
                 <ZoomHandler
                     zoomLevel={zoomLevel}
                     setZoomLevel={setZoomLevel}
+                />
+                <CenterLocatorHandler
+                    mapCenter={mapCenter}
+                    setMapCenter={setMapCenter}
                 />
                 <TileLayer
                     attribution={
