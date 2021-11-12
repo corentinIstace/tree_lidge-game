@@ -44,7 +44,7 @@ const Gamepage = () => {
                     }
                     url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                 />
-                <SomePointers />
+                <SomePointers zoomLevel={zoomLevel} />
                 {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
             </MapContainer>
             <Counts>

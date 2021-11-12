@@ -6,22 +6,33 @@ import {Marker, Popup} from "react-leaflet";
 /**
  * Loop over trees data and generate map markups
  */
-const SomePointers = () => (
-    <>
-        {Array.from(Trees)
-            .slice(0, 100)
-            .map(tree => {
-                if (!tree.geoloc || !tree.geoloc.lon || !tree.geoloc.lat) {
-                    return <div />;
-                }
-                const id = uuidv4();
-                return (
-                    <Marker key={String(id)} position={tree.geoloc}>
-                        <Popup>{String(id)}</Popup>
-                    </Marker>
-                );
-            })}
-    </>
-);
+const SomePointers = props => {
+    /**
+     * Do not display trees if zoom map too wide
+     */
+    if (props.zoomLevel < 17) {
+        return <div />;
+    }
+    return (
+        <>
+            {Array.from(Trees)
+                .slice(0, 100)
+                .map(tree => {
+                    /**
+                     * Do not display trees missing coordinates
+                     */
+                    if (!tree.geoloc || !tree.geoloc.lon || !tree.geoloc.lat) {
+                        return <div />;
+                    }
+                    const id = uuidv4();
+                    return (
+                        <Marker key={String(id)} position={tree.geoloc}>
+                            <Popup>{String(id)}</Popup>
+                        </Marker>
+                    );
+                })}
+        </>
+    );
+};
 
 export default SomePointers;
