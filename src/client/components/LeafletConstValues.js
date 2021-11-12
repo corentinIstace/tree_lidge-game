@@ -18,4 +18,4 @@ const mapLimits = [
 const minZoomLimit = 14;
 const maxZoomLimit = 18;
 
-export default {initialCoordinate, mapLimits, minZoomLimit, maxZoomLimit};
+export {initialCoordinate, mapLimits, minZoomLimit, maxZoomLimit};
