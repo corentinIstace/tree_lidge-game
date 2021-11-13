@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {MapContainer, TileLayer, Rectangle} from "react-leaflet";
-import SomePointers from "../client/components/SomePointers";
+import SomePointers from "../client/components/LeafletLocalData";
 import ZoomHandler from "../client/components/LeafletZoomHandler";
 import CenterLocatorHandler from "../client/components/LeafletCenterViewHandler";
 import {
