@@ -1,55 +1,99 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
-import {MapContainer, TileLayer /* Rectangle */} from "react-leaflet";
-import SomePointers from "../client/components/SomePointers";
+import {MapContainer, TileLayer} from "react-leaflet";
+import InBoundersMarkups from "../client/components/LeafletLocalData";
+import ZoomHandler from "../client/components/LeafletZoomHandler";
+import CenterLocatorHandler from "../client/components/LeafletCenterViewHandler";
+import {
+    initialCenterCoordinates,
+    mapLimits,
+    minZoomLimit,
+    maxZoomLimit,
+} from "../client/components/LeafletConstValues";
 
-const initialCoordinate = [50.6382, 5.5683]; // Center of Liège
-const mapLimits = [
-    [50.5722, 5.4983],
-    [50.7022, 5.68683],
+/**
+ * Height of the map display.
+ * Necessary value to display the map.
+ */
+const mapHeight = "100vh";
+
+// These values are necessary for the initial display, then will be overwritten by whenCreated of GameContainer
+const initialBounds = [
+    [50.64845366378443, 5.5523406982421875],
+    [50.628040512635025, 5.534191131591798],
 ];
-const minZoomLimit = 14;
-const maxZoomLimit = 18;
-const mapHeight = "80vh";
 
-const Gamepage = () => (
-    <GameContainer>
-        <Nav>
-            <Button>{"Menu"}</Button>
-            <Button>{"Logout"}</Button>
-        </Nav>
-        <MapContainer
-            style={{height: mapHeight}} // Force leaflet map height
-            center={initialCoordinate}
-            zoom={15}
-            scrollWheelZoom={false}
-            maxBounds={mapLimits}
-            minZoom={minZoomLimit}
-            maxZoom={maxZoomLimit}>
-            <TileLayer
-                attribution={
-                    '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                }
-                url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-            />
-            <SomePointers />
-            {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
-        </MapContainer>
-        <Counts>
-            <p>{"Trees : 40"}</p>
-            <p>{"Leaves : 5000"}</p>
-        </Counts>
-    </GameContainer>
-);
+const Gamepage = () => {
+    const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
+    const [mapCenter, setMapCenter] = useState(initialCenterCoordinates);
+    const [boundsView, setBoundsView] = useState(initialBounds);
 
+    return (
+        <GameContainer>
+            <Nav>
+                <Button>{"Menu"}</Button>
+                <Button>{"Logout"}</Button>
+            </Nav>
+            <MapContainer
+                style={{height: mapHeight}}
+                center={mapCenter}
+                zoom={zoomLevel}
+                scrollWheelZoom={false}
+                whenCreated={map => {
+                    // Update bounds when map is loaded
+                    const bounds = map.getBounds();
+                    setBoundsView([
+                        [bounds.getNorthEast().lat, bounds.getNorthEast().lng],
+                        [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
+                    ]);
+                }}
+                maxBounds={mapLimits}
+                minZoom={minZoomLimit}
+                maxZoom={maxZoomLimit}>
+                <ZoomHandler
+                    zoomLevel={zoomLevel}
+                    setZoomLevel={setZoomLevel}
+                />
+                <CenterLocatorHandler
+                    mapCenter={mapCenter}
+                    setMapCenter={setMapCenter}
+                    setBoundsView={setBoundsView}
+                />
+                <TileLayer
+                    maxNativeZoom={19}
+                    maxZoom={maxZoomLimit}
+                    attribution={
+                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    }
+                    url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
+                />
+                <InBoundersMarkups
+                    zoomLevel={zoomLevel}
+                    Bounders={boundsView}
+                />
+                {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
+            </MapContainer>
+            <Counts>
+                <p>{"Trees : 40"}</p>
+                <p>{"Leaves : 5000"}</p>
+            </Counts>
+        </GameContainer>
+    );
+};
 export default Gamepage;
 
+/**
+ * Main container of the current page.
+ */
 const GameContainer = styled.section`
     position: relative;
     width: 100%;
     background-color: yellow;
 `;
 
+/**
+ * Navbar.
+ */
 const Nav = styled.nav`
     display: flex;
     flex-flow: row nowrap;
@@ -61,6 +105,9 @@ const Nav = styled.nav`
     z-index: 999;
 `;
 
+/**
+ * Buttons in the navbar.
+ */
 const Button = styled.button`
     background-color: rgba(54, 198, 96, 0.8);
     border: none;
@@ -79,12 +126,17 @@ const Button = styled.button`
     }
 `;
 
+/**
+ * Informative display for the player.
+ * Show number of trees and leaves owned by the player.
+ */
 const Counts = styled.article`
     background-color: rgba(54, 198, 96, 0.8);
     position: absolute;
     text-align: right;
     bottom: 2vh;
     right: 2vh;
-    padding: 15px;
-    width: 10vw;
+    padding: 20px;
+    width: 35vw;
+    z-index: 999;
 `;

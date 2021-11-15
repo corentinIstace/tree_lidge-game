@@ -1,16 +1,32 @@
 /**
  * File to transform data from arbustum.json to more light and useful set of data.
+ *
+ * HOW TO USE - NODE.JS
+ * --------------------
+ *
+ * import {Collection} from "../ressources/temp.datatransformer";
+ *
+ * const MyPage = () => (
+ *    <>
+ *        <Collection />
+ *    </>
+ * )
  */
-import Trees from "arbustum.json";
-import {v4 as uuidv4} from "uuid";
+import Trees from "./arbustum.json";
 
-console.log(
-    "resulting data set",
-    Trees.map(tree => {
-        const newTree = {
-            geoloc: tree.geoloc,
-            id: uuidv4(),
-        };
-        return newTree;
-    }),
-);
+export const Collection = () => {
+    console.log(
+        "resulting data set",
+        Trees.map(tree => {
+            const newTree = {
+                geoloc: tree.geoloc,
+                value: tree.hauteur_totale * tree.diametre_cime,
+                name: tree.nom_complet,
+                owner: null,
+                isLocked: false,
+            };
+            return newTree;
+        }),
+    );
+    return null;
+};
