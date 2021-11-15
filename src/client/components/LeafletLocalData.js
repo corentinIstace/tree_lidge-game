@@ -34,7 +34,12 @@ const InBoundersMarkups = props => {
                     const id = uuidv4();
                     return (
                         <Marker key={String(id)} position={tree.geoloc}>
-                            <Popup>{String(id)}</Popup>
+                            <Popup>
+                                {tree.nom_complet !==
+                                "en cours de détermination"
+                                    ? tree.nom_complet
+                                    : "Tree"}
+                            </Popup>
                         </Marker>
                     );
                 })}
