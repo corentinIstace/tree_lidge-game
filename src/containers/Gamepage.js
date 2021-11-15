@@ -64,6 +64,8 @@ const Gamepage = () => {
                     bounds={boundsView || initialBounds}
                 />
                 <TileLayer
+                    maxNativeZoom={19}
+                    maxZoom={maxZoomLimit}
                     attribution={
                         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     }
