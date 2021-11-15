@@ -16,6 +16,6 @@ const mapLimits = [
  * Limits of zoom. Player cannot zoom too close or too away.
  */
 const minZoomLimit = 14;
-const maxZoomLimit = 18;
+const maxZoomLimit = 20;
 
 export {initialCenterCoordinates, mapLimits, minZoomLimit, maxZoomLimit};

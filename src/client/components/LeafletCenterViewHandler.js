@@ -26,7 +26,6 @@ const CenterLocatorHandler = props => {
             props.setBoundsView(convertBounds(mapEvents));
         },
     });
-    console.log("view area", convertBounds(mapEvents));
     return null;
 };
 

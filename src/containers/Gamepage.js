@@ -26,7 +26,7 @@ const initialBounds = [
 const Gamepage = () => {
     const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
     const [mapCenter, setMapCenter] = useState(initialCenterCoordinates);
-    const [boundsView, setBoundsView] = useState(null);
+    const [boundsView, setBoundsView] = useState(initialBounds);
 
     return (
         <GameContainer>
@@ -41,7 +41,11 @@ const Gamepage = () => {
                 scrollWheelZoom={false}
                 whenCreated={map => {
                     // Update bounds when map is loaded
-                    setBoundsView(map.getBounds());
+                    const bounds = map.getBounds();
+                    setBoundsView([
+                        [bounds.getNorthEast().lat, bounds.getNorthEast().lng],
+                        [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
+                    ]);
                 }}
                 maxBounds={mapLimits}
                 minZoom={minZoomLimit}
@@ -55,7 +59,7 @@ const Gamepage = () => {
                     setMapCenter={setMapCenter}
                     setBoundsView={setBoundsView}
                 />
-                <Rectangle
+                <Rectangle // Temporary, show screen bounds on map
                     center={mapCenter}
                     bounds={boundsView || initialBounds}
                 />
