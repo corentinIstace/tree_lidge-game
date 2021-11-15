@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {MapContainer, TileLayer, Rectangle} from "react-leaflet";
+import {MapContainer, TileLayer} from "react-leaflet";
 import InBoundersMarkups from "../client/components/LeafletLocalData";
 import ZoomHandler from "../client/components/LeafletZoomHandler";
 import CenterLocatorHandler from "../client/components/LeafletCenterViewHandler";
@@ -58,10 +58,6 @@ const Gamepage = () => {
                     mapCenter={mapCenter}
                     setMapCenter={setMapCenter}
                     setBoundsView={setBoundsView}
-                />
-                <Rectangle // Temporary, show screen bounds on map
-                    center={mapCenter}
-                    bounds={boundsView || initialBounds}
                 />
                 <TileLayer
                     maxNativeZoom={19}
