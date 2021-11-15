@@ -22,7 +22,12 @@ const UserPage = () => (
     </Container>
 );
 const Container = styled.div`
-    background-color: #111824;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(
+        0deg,
+        rgba(34, 193, 195, 1) 0%,
+        rgba(75, 152, 31, 1) 100%
+    );
     display: flex;
     flex-direction: column;
     margin: 0;
