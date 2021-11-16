@@ -25,8 +25,11 @@ const initialBounds = [
 
 const Gamepage = () => {
     const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
-    const [mapCenter, setMapCenter] = useState(initialCenterCoordinates);
-    const [boundsView, setBoundsView] = useState(initialBounds);
+    const [mapCenter, setMapCenter] = useState(initialCenterCoordinates); // set center of the map view
+    const [boundsView, setBoundsView] = useState(initialBounds); // set bounds of the map view (user screen)
+    const [userTrees, setUserTrees] = useState(0); // number of trees owned
+    const [userLeaves, setUserLeaves] = useState(5000); // Number of leaves owned
+    const [userName] = useState("Bertrand"); // TODO remove for global username variable
 
     return (
         <GameContainer>
@@ -70,12 +73,21 @@ const Gamepage = () => {
                 <InBoundersMarkups
                     zoomLevel={zoomLevel}
                     Bounders={boundsView}
+                    userName={userName}
+                    userTrees={userTrees}
+                    setUserTrees={setUserTrees}
+                    userLeaves={userLeaves}
+                    setUserLeaves={setUserLeaves}
                 />
                 {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
             </MapContainer>
             <Counts>
-                <p>{"Trees : 40"}</p>
-                <p>{"Leaves : 5000"}</p>
+                <p>
+                    {"Trees : "} {userTrees}
+                </p>
+                <p>
+                    {"Leaves : "} {userLeaves}
+                </p>
             </Counts>
         </GameContainer>
     );
