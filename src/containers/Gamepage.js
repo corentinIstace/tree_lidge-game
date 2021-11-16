@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import {MapContainer, TileLayer} from "react-leaflet";
+import MarkerClusterGroup from "react-leaflet-markercluster";
 import InBoundersMarkups from "../client/components/LeafletLocalData";
 import ZoomHandler from "../client/components/LeafletZoomHandler";
 import CenterLocatorHandler from "../client/components/LeafletCenterViewHandler";
@@ -38,6 +39,7 @@ const Gamepage = () => {
                 <Button>{"Logout"}</Button>
             </Nav>
             <MapContainer
+                className={"markercluster-map"}
                 style={{height: mapHeight}}
                 center={mapCenter}
                 zoom={zoomLevel}
@@ -70,15 +72,21 @@ const Gamepage = () => {
                     }
                     url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                 />
-                <InBoundersMarkups
-                    zoomLevel={zoomLevel}
-                    Bounders={boundsView}
-                    userName={userName}
-                    userTrees={userTrees}
-                    setUserTrees={setUserTrees}
-                    userLeaves={userLeaves}
-                    setUserLeaves={setUserLeaves}
-                />
+                <MarkerClusterGroup
+                    disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
+                    maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
+                    showCoverageOnHover={false} // Show area of the cluster
+                    spiderfyOnMaxZoom={false}>
+                    <InBoundersMarkups
+                        zoomLevel={zoomLevel}
+                        Bounders={boundsView}
+                        userName={userName}
+                        userTrees={userTrees}
+                        setUserTrees={setUserTrees}
+                        userLeaves={userLeaves}
+                        setUserLeaves={setUserLeaves}
+                    />
+                </MarkerClusterGroup>
                 {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
             </MapContainer>
             <Counts>

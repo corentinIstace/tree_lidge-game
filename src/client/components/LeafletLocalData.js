@@ -11,14 +11,6 @@ import TreePopup from "./LeafletTreePopup";
  */
 const InBoundersMarkups = props => {
     const Leaflet = window.L;
-
-    /**
-     * Do not display trees if zoom map too wide
-     */
-    if (props.zoomLevel < 18) {
-        return <div />;
-    }
-
     const treeIcon = Leaflet.icon({
         iconUrl: icon,
         iconSize: [
@@ -28,6 +20,32 @@ const InBoundersMarkups = props => {
         iconAnchor: [5, 35], // point of the icon which will correspond to marker's location
         popupAnchor: [5, -40], // point from which the popup should open relative to the iconAnchor
     });
+
+    /**
+     * Display tree with less elements (wide view)
+     */
+    if (props.zoomLevel < 18) {
+        return (
+            <>
+                {Array.from(Trees)
+                    .filter(tree => {
+                        // Filter trees with coordinates and inside the given bounders.
+                        const bounds = Leaflet.latLngBounds(props.Bounders);
+                        return bounds.contains(tree.geoloc);
+                    })
+                    .map(tree => {
+                        const id = uuidv4();
+                        return (
+                            <Marker
+                                key={String(id)}
+                                position={tree.geoloc}
+                                icon={treeIcon}
+                            />
+                        );
+                    })}
+            </>
+        );
+    }
 
     return (
         <>
