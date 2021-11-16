@@ -24,7 +24,11 @@ export const Collection = () => {
                 const newTree = {
                     geoloc: tree.geoloc,
                     value: tree.hauteur_totale * (tree.circonf / Math.PI),
-                    name: tree.nom_complet,
+                    name:
+                        tree.nom_complet !== "en cours de détermination" &&
+                        tree.nom_complet !== "A DETERMINER"
+                            ? tree.nom_complet
+                            : "Tree",
                     owner: null,
                     isLocked: false,
                 };
