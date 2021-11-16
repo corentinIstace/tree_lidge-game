@@ -4,6 +4,8 @@ import {v4 as uuidv4} from "uuid";
 import Trees from "../../ressources/data.json";
 import {Marker, Popup} from "react-leaflet";
 import icon from "../../ressources/img/jean-victor-balin-tree.svg";
+import TreePopup from "./LeafletTreePopup";
+
 /**
  * Loop over trees data and generate map markups
  */
@@ -40,9 +42,7 @@ const InBoundersMarkups = props => {
                             position={tree.geoloc}
                             icon={treeIcon}>
                             <Popup>
-                                {tree.name}
-                                <br />
-                                {`Price : ${tree.value ?? "None"}`}
+                                <TreePopup tree={tree} />
                             </Popup>
                         </Marker>
                     );
