@@ -73,6 +73,11 @@ const Gamepage = () => {
                     url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
                 />
                 <MarkerClusterGroup
+                    /**
+                     * Documentation markercluster
+                     * https://www.npmjs.com/package/leaflet.markercluster
+                     * https://github.com/Leaflet/Leaflet.markercluster#usage
+                     */
                     disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
                     maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
                     showCoverageOnHover={false} // Show area of the cluster
