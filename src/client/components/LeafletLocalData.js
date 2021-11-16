@@ -1,9 +1,9 @@
 // TEMP
 import React from "react";
 import {v4 as uuidv4} from "uuid";
-import Trees from "../../ressources/arbustum.json";
+import Trees from "../../ressources/data.json";
 import {Marker, Popup} from "react-leaflet";
-
+import icon from "../../ressources/img/jean-victor-balin-tree.svg";
 /**
  * Loop over trees data and generate map markups
  */
@@ -17,28 +17,32 @@ const InBoundersMarkups = props => {
         return <div />;
     }
 
+    const treeIcon = Leaflet.icon({
+        iconUrl: icon,
+        iconSize: [9, 45], // size of the icon
+        iconAnchor: [5, 35], // point of the icon which will correspond to marker's location
+        popupAnchor: [5, -40], // point from which the popup should open relative to the iconAnchor
+    });
+
     return (
         <>
             {Array.from(Trees)
                 .filter(tree => {
                     // Filter trees with coordinates and inside the given bounders.
                     const bounds = Leaflet.latLngBounds(props.Bounders);
-                    return (
-                        tree.geoloc &&
-                        tree.geoloc.lon &&
-                        tree.geoloc.lat &&
-                        bounds.contains(tree.geoloc)
-                    );
+                    return bounds.contains(tree.geoloc);
                 })
                 .map(tree => {
                     const id = uuidv4();
                     return (
-                        <Marker key={String(id)} position={tree.geoloc}>
+                        <Marker
+                            key={String(id)}
+                            position={tree.geoloc}
+                            icon={treeIcon}>
                             <Popup>
-                                {tree.nom_complet !==
-                                "en cours de détermination"
-                                    ? tree.nom_complet
-                                    : "Tree"}
+                                {tree.name}
+                                <br />
+                                {`Price : ${tree.value ?? "None"}`}
                             </Popup>
                         </Marker>
                     );
