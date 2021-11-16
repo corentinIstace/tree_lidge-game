@@ -6,7 +6,7 @@ const TreePopup = props => {
         <>
             <b>{Tree.name}</b>
             <br />
-            {`Price : ${Tree.value ?? "None"}`}
+            <p>{`Price : ${Number(Tree.value).toFixed(2) ?? "?"} Leaves`}</p>
             <br />
             <br />
             {Tree.owner ? `Owned by ${Tree.owner}` : `Free tree`}
