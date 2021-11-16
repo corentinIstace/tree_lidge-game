@@ -21,7 +21,10 @@ const InBoundersMarkups = props => {
 
     const treeIcon = Leaflet.icon({
         iconUrl: icon,
-        iconSize: [9, 45], // size of the icon
+        iconSize: [
+            (9 * (props.zoomLevel * 2)) / 30,
+            (45 * (props.zoomLevel * 2)) / 30,
+        ], // size of the icon
         iconAnchor: [5, 35], // point of the icon which will correspond to marker's location
         popupAnchor: [5, -40], // point from which the popup should open relative to the iconAnchor
     });
