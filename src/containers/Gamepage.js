@@ -1,36 +1,10 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {MapContainer, TileLayer} from "react-leaflet";
-import MarkerClusterGroup from "react-leaflet-markercluster";
-import InBoundersMarkups from "../client/components/LeafletLocalData";
-import ZoomHandler from "../client/components/LeafletZoomHandler";
-import CenterLocatorHandler from "../client/components/LeafletCenterViewHandler";
-import {
-    initialCenterCoordinates,
-    mapLimits,
-    minZoomLimit,
-    maxZoomLimit,
-} from "../client/components/LeafletConstValues";
-
-/**
- * Height of the map display.
- * Necessary value to display the map.
- */
-const mapHeight = "100vh";
-
-// These values are necessary for the initial display, then will be overwritten by whenCreated of GameContainer
-const initialBounds = [
-    [50.64845366378443, 5.5523406982421875],
-    [50.628040512635025, 5.534191131591798],
-];
+import Map from "../client/components/LeafletMap";
 
 const Gamepage = () => {
-    const [zoomLevel, setZoomLevel] = useState(15); // initial zoom level provided for MapContainer
-    const [mapCenter, setMapCenter] = useState(initialCenterCoordinates); // set center of the map view
-    const [boundsView, setBoundsView] = useState(initialBounds); // set bounds of the map view (user screen)
     const [userTrees, setUserTrees] = useState(0); // number of trees owned
     const [userLeaves, setUserLeaves] = useState(5000); // Number of leaves owned
-    const [userName] = useState("Bertrand"); // TODO remove for global username variable
 
     return (
         <GameContainer>
@@ -38,62 +12,12 @@ const Gamepage = () => {
                 <Button>{"Menu"}</Button>
                 <Button>{"Logout"}</Button>
             </Nav>
-            <MapContainer
-                className={"markercluster-map"}
-                style={{height: mapHeight}}
-                center={mapCenter}
-                zoom={zoomLevel}
-                scrollWheelZoom={false}
-                whenCreated={map => {
-                    // Update bounds when map is loaded
-                    const bounds = map.getBounds();
-                    setBoundsView([
-                        [bounds.getNorthEast().lat, bounds.getNorthEast().lng],
-                        [bounds.getSouthWest().lat, bounds.getSouthWest().lng],
-                    ]);
-                }}
-                maxBounds={mapLimits}
-                minZoom={minZoomLimit}
-                maxZoom={maxZoomLimit}>
-                <ZoomHandler
-                    zoomLevel={zoomLevel}
-                    setZoomLevel={setZoomLevel}
-                />
-                <CenterLocatorHandler
-                    mapCenter={mapCenter}
-                    setMapCenter={setMapCenter}
-                    setBoundsView={setBoundsView}
-                />
-                <TileLayer
-                    maxNativeZoom={19}
-                    maxZoom={maxZoomLimit}
-                    attribution={
-                        '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                    }
-                    url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
-                />
-                <MarkerClusterGroup
-                    /**
-                     * Documentation markercluster
-                     * https://www.npmjs.com/package/leaflet.markercluster
-                     * https://github.com/Leaflet/Leaflet.markercluster#usage
-                     */
-                    disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
-                    maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
-                    showCoverageOnHover={false} // Show area of the cluster
-                    spiderfyOnMaxZoom={false}>
-                    <InBoundersMarkups
-                        zoomLevel={zoomLevel}
-                        Bounders={boundsView}
-                        userName={userName}
-                        userTrees={userTrees}
-                        setUserTrees={setUserTrees}
-                        userLeaves={userLeaves}
-                        setUserLeaves={setUserLeaves}
-                    />
-                </MarkerClusterGroup>
-                {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
-            </MapContainer>
+            <Map
+                userTrees={userTrees}
+                setUserTrees={setUserTrees}
+                userLeaves={userLeaves}
+                setUserLeaves={setUserLeaves}
+            />
             <Counts>
                 <p>
                     {"Trees : "} {userTrees}
