@@ -24,7 +24,7 @@ const Map = props => {
         [50.628040512635025, 5.534191131591798],
     ];
 
-    const [zoomLevel, setZoomLevel] = useState(12); // initial zoom level provided for MapContainer
+    const [zoomLevel, setZoomLevel] = useState(18); // initial zoom level provided for MapContainer
     const [mapCenter, setMapCenter] = useState(initialCenterCoordinates); // set center of the map view
     const [boundsView, setBoundsView] = useState(initialBounds); // set bounds of the map view (user screen)
     const [userName] = useState("Bertrand"); // TODO remove for global username variable
@@ -36,6 +36,7 @@ const Map = props => {
             center={mapCenter}
             zoom={zoomLevel}
             scrollWheelZoom={false}
+            preferCanvas={true}
             whenCreated={map => {
                 // Update bounds when map is loaded
                 const bounds = map.getBounds();
@@ -54,33 +55,41 @@ const Map = props => {
                 setBoundsView={setBoundsView}
             />
             <TileLayer
-                maxNativeZoom={19}
+                maxNativeZoom={19} // Zoom level +20 unavailable, use and scale level 19
                 maxZoom={maxZoomLimit}
                 attribution={
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 }
                 url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
             />
-            <MarkerClusterGroup
-                /**
-                 * Documentation markercluster
-                 * https://www.npmjs.com/package/leaflet.markercluster
-                 * https://github.com/Leaflet/Leaflet.markercluster#usage
-                 */
-                disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
-                maxClusterRadius={50} // Set number of cluster around eachother. Bigger value mean less cluster markers.
-                showCoverageOnHover={false} // Show area of the cluster
-                spiderfyOnMaxZoom={false}>
-                <InBoundersMarkups
-                    zoomLevel={zoomLevel}
-                    Bounders={boundsView}
-                    userName={userName}
-                    userTrees={props.userTrees}
-                    setUserTrees={props.setUserTrees}
-                    userLeaves={props.userLeaves}
-                    setUserLeaves={props.setUserLeaves}
-                />
-            </MarkerClusterGroup>
+            {
+                /* zoomLevel > 16 ? ( */
+                <MarkerClusterGroup
+                    /**
+                     * Documentation markercluster
+                     * https://www.npmjs.com/package/leaflet.markercluster
+                     * https://github.com/Leaflet/Leaflet.markercluster#usage
+                     */
+                    disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
+                    maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
+                    showCoverageOnHover={false} // Show area of the cluster
+                    chunkedLoading={true} // Boolean to split the addLayers processing in to small intervals so that the page *may* not freeze.
+                    spiderfyOnMaxZoom={false}>
+                    {/* Show markers linked when close to eachother */}
+                    <InBoundersMarkups
+                        zoomLevel={zoomLevel}
+                        Bounders={boundsView}
+                        userName={userName}
+                        userTrees={props.userTrees}
+                        setUserTrees={props.setUserTrees}
+                        userLeaves={props.userLeaves}
+                        setUserLeaves={props.setUserLeaves}
+                    />
+                </MarkerClusterGroup> /* 
+            ) : (
+                <MaxZoomClusters />
+            )} */
+            }
             {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
         </MapContainer>
     );

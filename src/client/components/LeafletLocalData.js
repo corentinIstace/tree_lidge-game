@@ -2,7 +2,7 @@
 import React from "react";
 import {v4 as uuidv4} from "uuid";
 import Trees from "../../ressources/data.json";
-import {Marker, Popup} from "react-leaflet";
+import {Marker, CircleMarker, Popup} from "react-leaflet";
 import icon from "../../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
 
@@ -33,16 +33,16 @@ const InBoundersMarkups = props => {
                         const bounds = Leaflet.latLngBounds(props.Bounders);
                         return bounds.contains(tree.geoloc);
                     })
-                    .map(tree => {
-                        const id = uuidv4();
-                        return (
-                            <Marker
-                                key={String(id)}
-                                position={tree.geoloc}
-                                icon={treeIcon}
-                            />
-                        );
-                    })}
+                    .map(tree => (
+                        // TODO use id when connected to mongoDB
+                        // eslint-disable-next-line react/jsx-key
+                        <CircleMarker
+                            /* key={tree.id} */
+                            color={"#00ff00"}
+                            center={tree.geoloc}
+                            radius={2}
+                        />
+                    ))}
             </>
         );
     }
