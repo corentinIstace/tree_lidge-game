@@ -14,9 +14,8 @@ const Factor = zoomLevel => {
         case 19:
             return 2;
         case 18:
-            return 1;
         default:
-            return null;
+            return 1;
     }
 };
 
@@ -31,8 +30,8 @@ const InBoundersMarkups = props => {
     const treeIcon = Leaflet.icon({
         iconUrl: icon,
         iconSize: [xSize, ySize], // size of the icon
-        iconAnchor: [5 * (xSize / 50), 35 * (ySize / 50)], // point of the icon which will correspond to marker's location
-        popupAnchor: [5, -40], // point from which the popup should open relative to the iconAnchor
+        iconAnchor: [45 * (xSize / 50), 40 * (ySize / 50)], // point offset of the icon which will correspond to marker's location
+        popupAnchor: [-12, -90], // point offset from which the popup should open relative to the iconAnchor
     });
 
     /**
@@ -61,17 +60,6 @@ const InBoundersMarkups = props => {
         );
     }
 
-    const StyledPop = styled(Popup)`
-        .leaflet-popup-content-wrapper {
-            background-color: lightgreen;
-            width: 400px;
-        }
-        /* 
-        .leaflet-popup-tip-container {
-            visibility: hidden;
-        } */
-    `;
-
     return (
         <>
             {Array.from(Trees)
@@ -96,5 +84,16 @@ const InBoundersMarkups = props => {
         </>
     );
 };
+
+const StyledPop = styled(Popup)`
+    .leaflet-popup-content-wrapper {
+        background-color: lightgreen;
+        width: 400px;
+    }
+    /* 
+.leaflet-popup-tip-container {
+    visibility: hidden;
+} */
+`;
 
 export default InBoundersMarkups;
