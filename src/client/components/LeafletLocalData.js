@@ -5,6 +5,7 @@ import Trees from "../../ressources/data.json";
 import {Marker, CircleMarker, Popup} from "react-leaflet";
 import icon from "../../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
+import styled from "styled-components";
 
 /**
  * Loop over trees data and generate map markups
@@ -47,6 +48,17 @@ const InBoundersMarkups = props => {
         );
     }
 
+    const StyledPop = styled(Popup)`
+        .leaflet-popup-content-wrapper {
+            background-color: lightgreen;
+            width: 400px;
+        }
+        /* 
+        .leaflet-popup-tip-container {
+            visibility: hidden;
+        } */
+    `;
+
     return (
         <>
             {Array.from(Trees)
@@ -62,9 +74,9 @@ const InBoundersMarkups = props => {
                             key={String(id)}
                             position={tree.geoloc}
                             icon={treeIcon}>
-                            <Popup>
+                            <StyledPop>
                                 <TreePopup tree={tree} />
-                            </Popup>
+                            </StyledPop>
                         </Marker>
                     );
                 })}
