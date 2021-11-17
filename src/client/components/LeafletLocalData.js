@@ -7,18 +7,31 @@ import icon from "../../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
 import styled from "styled-components";
 
+const Factor = zoomLevel => {
+    switch (zoomLevel) {
+        case 20:
+            return 3;
+        case 19:
+            return 2;
+        case 18:
+            return 1;
+        default:
+            return null;
+    }
+};
+
 /**
  * Loop over trees data and generate map markups
  */
 const InBoundersMarkups = props => {
+    const xSize = 9 * Factor(props.zoomLevel);
+    const ySize = 45 * Factor(props.zoomLevel);
+
     const Leaflet = window.L;
     const treeIcon = Leaflet.icon({
         iconUrl: icon,
-        iconSize: [
-            (9 * (props.zoomLevel * 2)) / 30,
-            (45 * (props.zoomLevel * 2)) / 30,
-        ], // size of the icon
-        iconAnchor: [5, 35], // point of the icon which will correspond to marker's location
+        iconSize: [xSize, ySize], // size of the icon
+        iconAnchor: [5 * (xSize / 50), 35 * (ySize / 50)], // point of the icon which will correspond to marker's location
         popupAnchor: [5, -40], // point from which the popup should open relative to the iconAnchor
     });
 
