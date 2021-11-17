@@ -1,3 +1,49 @@
+# Installation
+
+```
+npm install
+npx @becode/eslint-config --with-hook
+```
+
+Comment line 272 in node_modules/@becode/eslint-config/index.jsn
+`"unicorn/filename-case": [ERROR, {case: "kebabCase"}],`
+
+Rewrite .eslintrc as the following
+
+```
+module.exports = {
+    extends: "@becode",
+    parser: "@babel/eslint-parser",
+    parserOptions: {
+        babelOptions: {
+            presets: ["@babel/preset-react"],
+        },
+    },
+};
+```
+
+Rewrite prettierrc as the following
+
+```
+{
+    "singleQuote": false,
+    "tabWidth": 4,
+    "trailingComma": "all",
+    "bracketSpacing": false,
+    "jsxBracketSameLine": true,
+    "endOfLine": "auto",
+    "arrowParens": "avoid",
+    "overrides": [
+        {
+            "files": "*.json",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}
+```
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
