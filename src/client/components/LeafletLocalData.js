@@ -31,7 +31,7 @@ const InBoundersMarkups = props => {
         iconUrl: icon,
         iconSize: [xSize, ySize], // size of the icon
         iconAnchor: [45 * (xSize / 50), 40 * (ySize / 50)], // point offset of the icon which will correspond to marker's location
-        popupAnchor: [-12, -90], // point offset from which the popup should open relative to the iconAnchor
+        popupAnchor: [-20 * (xSize / 50), -35 * (ySize / 50)], // point offset from which the popup should open relative to the iconAnchor
     });
 
     /**
