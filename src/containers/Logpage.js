@@ -1,9 +1,9 @@
 import React, {useState} from "react";
+import {Link} from "react-router-dom";
 import styled from "styled-components";
 import Login from "../client/components/Login";
 import Register from "../client/components/Register";
 import MySvg from "../ressources/img/tree-lidge-logo-3.svg";
-// import {BrowserRouter as Router} from "react-router-dom"
 
 const Logpage = () => {
     const [btnSwitch, setBtnSwitch] = useState(true);
@@ -15,10 +15,14 @@ const Logpage = () => {
             <Container>
                 <Logo src={MySvg} alt={"Tree Lidge Logo"} />
                 <ContainerButtons>
-                    <Login />
-                    <Button onClick={toggleBtnSwitchOnClick}>
-                        {"Register"}
-                    </Button>
+                    <Link to={"/login"}>
+                        <Login />
+                    </Link>
+                    <Link to={"/register"}>
+                        <Button onClick={toggleBtnSwitchOnClick}>
+                            {"Register"}
+                        </Button>
+                    </Link>
                 </ContainerButtons>
             </Container>
         );
@@ -27,8 +31,12 @@ const Logpage = () => {
         <Container>
             <Logo src={MySvg} alt={"Tree Lidge Logo"} />
             <ContainerButtons>
-                <Register />
-                <Button onClick={toggleBtnSwitchOnClick}>{"Login"}</Button>
+                <Link to={"/register"}>
+                    <Register />
+                </Link>
+                <Link to={"/login"}>
+                    <Button onClick={toggleBtnSwitchOnClick}>{"Login"}</Button>
+                </Link>
             </ContainerButtons>
         </Container>
     );
