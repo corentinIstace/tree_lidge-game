@@ -1,29 +1,39 @@
 import React from "react";
 import styled from "styled-components";
+import foret from "../ressources/img/foret.png";
 
 const Homepage = () => (
     <>
-        <Title>{"Tree Lidge"}</Title>
-        <Wrapper>
-            <Tile>{"Leader board"}</Tile>
-            <Tile>{"Profile"}</Tile>
-            <Tile>{"Success"}</Tile>
-            <Tile>{"Challenges"}</Tile>
-        </Wrapper>
+        <Page>
+            <ContainerTitle>
+                <Title>{"Tree Lidge"}</Title>
+            </ContainerTitle>
+            <Wrapper>
+                <Tile>{"Leader board"}</Tile>
+                <Tile>{"Profile"}</Tile>
+                <Tile>{"Success"}</Tile>
+                <Tile>{"Challenges"}</Tile>
+            </Wrapper>
+        </Page>
     </>
 );
 
 export default Homepage;
 
-const Title = styled.h1`
-    margin-top: 75px;
+const Page = styled.div`
+    background-image: url(${foret});
+    padding: 40px 0px;
+`;
+const ContainerTitle = styled.div`
+    background-color: rgba(54, 198, 96, 0.8);
     width: max-content;
     margin-right: auto;
     margin-left: auto;
-    background-color: #a53131;
+    padding: 0px 20px;
+    border-radius: 5px;
+`;
+const Title = styled.h1`
     color: black;
-    font-size: 10vw;
-
     /**
   * Fixed title sizes for desktop
   */
@@ -44,9 +54,7 @@ const Wrapper = styled.section`
     width: 80vw;
     margin-left: auto;
     margin-right: auto;
-    background-color: #d9ff00;
-    transform: translateY(2vh);
-
+    background-color: transparent;
     /**
   * Fixed sizes for desktop
   */
@@ -56,7 +64,7 @@ const Wrapper = styled.section`
 `;
 
 const Tile = styled.button`
-    background-color: #2f00ff;
+    background-color: rgba(116, 150, 110, 0.8);
     width: 30vw;
     height: 40vw;
     margin: 2.5vw;
@@ -65,6 +73,15 @@ const Tile = styled.button`
     border-radius: 5px;
     border: solid 1px green;
     font-size: 5vw;
+
+    :hover {
+        -webkit-transform: scale(1.05); /* Safari et Chrome */
+        -moz-transform: scale(1.05); /* Firefox */
+        -ms-transform: scale(1.05); /* Internet Explorer 9 */
+        -o-transform: scale(1.05); /* Opera */
+        transform: scale(1.05);
+        text-decoration: underline;
+    }
 
     /**
   * Fixed buttons sizes for desktop
