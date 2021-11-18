@@ -2,7 +2,7 @@
   "name": "tree_lidge-game",
   "version": "0.1.0",
   "private": true,
-  "type": "module",
+  "type": "commonjs",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/eslint-parser": "^7.16.0",
