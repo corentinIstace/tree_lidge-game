@@ -1,8 +1,8 @@
 import React, {useState} from "react";
 import {Link} from "react-router-dom";
 import styled from "styled-components";
-import Login from "../client/components/Login";
-import Register from "../client/components/Register";
+import Login from "../components/Login";
+import Register from "../components/Register";
 import MySvg from "../ressources/img/tree-lidge-logo-3.svg";
 
 const Logpage = () => {

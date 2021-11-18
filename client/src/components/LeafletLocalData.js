@@ -1,9 +1,9 @@
 // TEMP
 import React from "react";
 import {v4 as uuidv4} from "uuid";
-import Trees from "../../ressources/data.json";
+import Trees from "../ressources/data.json";
 import {Marker, CircleMarker, Popup} from "react-leaflet";
-import icon from "../../ressources/img/jean-victor-balin-tree.svg";
+import icon from "../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
 import styled from "styled-components";
 

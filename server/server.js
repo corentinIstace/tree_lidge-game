@@ -13,6 +13,7 @@ App.use("/register", registerRouter);
 
 App.use("/login", loginRouter);
 
+// eslint-disable-next-line no-console
 mongoose.connect(process.env.DB_CONNECTION, () => console.log("Connected"));
 
-App.listen(3000);
+App.listen(5000);

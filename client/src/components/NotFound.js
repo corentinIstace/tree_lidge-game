@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import error404 from "../../ressources/img/error404.png";
-import TreeError404 from "../../ressources/img/TreeError404.jpg";
+import error404 from "../ressources/img/error404.png";
+import TreeError404 from "../ressources/img/TreeError404.jpg";
 
 const NotFound = () => (
     <Container>

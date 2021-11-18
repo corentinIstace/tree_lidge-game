@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import UserModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 
@@ -11,33 +12,38 @@ const register = async (request, response) => {
 
         // Some conditions to register.
 
-        if (!email || !username || !password || !passwordVerify)
+        if (!email || !username || !password || !passwordVerify) {
             return response.status(400).json({
                 errorMessage: "Please enter all required fields.",
             });
+        }
 
-        if (username.length < 3)
+        if (username.length < 3) {
             return response.status(400).json({
                 errorMessage:
                     "Please enter an username of at least 3 characters.",
             });
+        }
 
-        if (password.length < 5)
+        if (password.length < 5) {
             return response.status(400).json({
                 errorMessage:
                     "Please enter a password of at least 5 characters.",
             });
+        }
 
-        if (password !== passwordVerify)
+        if (password !== passwordVerify) {
             return response.status(400).json({
                 errorMessage: "Please enter the same password twice.",
             });
+        }
 
         const existingUser = await UserModel.findOne({UserEmail: email});
-        if (existingUser)
+        if (existingUser) {
             return response.status(400).json({
                 errorMessage: "An account with this email already exists.",
             });
+        }
 
         // Encrypt the password
 
@@ -52,7 +58,6 @@ const register = async (request, response) => {
         const SavedUser = await NewUser.save();
         response.json(SavedUser);
     } catch (error) {
-        console.error(error);
         response.status(500).send("Error 500 Check your terminal");
     }
 };

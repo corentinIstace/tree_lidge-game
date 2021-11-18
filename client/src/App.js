@@ -1,12 +1,12 @@
 import React from "react";
-import Logpage from "../containers/Logpage";
-import Homepage from "../containers/Homepage";
-import Gamepage from "../containers/Gamepage";
-import UserPage from "../containers/UserPage";
-import NotFound from "./components/NotFound";
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
+import Logpage from "./containers/Logpage.js";
+import Homepage from "./containers/Homepage.js";
+import Gamepage from "./containers/Gamepage.js";
+import UserPage from "./containers/UserPage.js";
+import NotFound from "./components/NotFound.js";
+import Login from "./components/Login.js";
+import Register from "./components/Register.js";
 
 function App() {
     return (
