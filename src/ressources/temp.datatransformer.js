@@ -15,18 +15,26 @@
 import Trees from "./arbustum.json";
 
 export const Collection = () => {
+    console.log("raw dataset", Trees);
     console.log(
         "resulting data set",
-        Trees.map(tree => {
-            const newTree = {
-                geoloc: tree.geoloc,
-                value: tree.hauteur_totale * tree.diametre_cime,
-                name: tree.nom_complet,
-                owner: null,
-                isLocked: false,
-            };
-            return newTree;
-        }),
+        // Filter out trees missing both size and circonference values
+        Trees.filter(tree => tree.hauteur_totale > 0 && tree.circonf > 0).map(
+            tree => {
+                const newTree = {
+                    geoloc: tree.geoloc,
+                    value: tree.hauteur_totale * (tree.circonf / Math.PI),
+                    name:
+                        tree.nom_complet !== "en cours de détermination" &&
+                        tree.nom_complet !== "A DETERMINER"
+                            ? tree.nom_complet
+                            : "Tree",
+                    owner: null,
+                    isLocked: false,
+                };
+                return newTree;
+            },
+        ),
     );
     return null;
 };
