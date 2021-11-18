@@ -70,7 +70,7 @@ const Map = props => {
                      * https://www.npmjs.com/package/leaflet.markercluster
                      * https://github.com/Leaflet/Leaflet.markercluster#usage
                      */
-                    disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
+                    disableClusteringAtZoom={19} // Disable clsuetering and display all individual markers
                     maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
                     showCoverageOnHover={false} // Show area of the cluster
                     chunkedLoading={true} // Boolean to split the addLayers processing in to small intervals so that the page *may* not freeze.

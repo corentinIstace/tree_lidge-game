@@ -37,7 +37,7 @@ const InBoundersMarkups = props => {
     /**
      * Display tree with less elements (wide view)
      */
-    if (props.zoomLevel < 18) {
+    if (props.zoomLevel < 19) {
         return (
             <>
                 {Array.from(Trees)
