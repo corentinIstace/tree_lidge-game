@@ -1,5 +1,7 @@
 # Installation
 
+Version of Node in use : v16.13
+
 ```
 npm install
 npx @becode/eslint-config --with-hook
