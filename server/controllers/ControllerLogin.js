@@ -15,18 +15,16 @@ const login = async (request, response) => {
                 .status(400)
                 .json({errorMessage: "Please enter all required fields."});
 
-        const existingUser = await UserModel.findOne({email});
-        const salt = await bcrypt.genSalt();
-        const passwordHashed = await bcrypt.hash(password, salt);
+        const existingUser = await UserModel.findOne({UserEmail: email});
 
         if (existingUser)
             return bcrypt.compare(
-                request.body.password,
-                passwordHashed,
+                password,
+                existingUser.UserPasswordHash,
                 (error, result) => {
                     if (result) {
                         return response.json("You are logged in !");
-                    } else if (error) {
+                    } else {
                         return response
                             .status(401)
                             .json("Wrong email or password :(");
