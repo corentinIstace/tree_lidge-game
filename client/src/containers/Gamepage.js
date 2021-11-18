@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import Map from "../client/components/LeafletMap";
+import Map from "../components/LeafletMap";
 
 const Gamepage = () => {
     const [userTrees, setUserTrees] = useState(0); // number of trees owned

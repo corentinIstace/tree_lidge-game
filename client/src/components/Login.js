@@ -1,30 +1,24 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import axios from "axios";
+import {Link} from "react-router-dom";
+import mongoose from "mongoose";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    // const [buttonDisabled, setButtonDisabled] = useState(true);
-
-    // useEffect(() => {
-    //   setButtonDisabled(toggleDisabledButton());
-    // }, [email, password]);
-
-    // function toggleDisabledButton() {
-    //   // return _.isEmpty(email) || _.isEmpty(password);
-    // }
 
     async function login(event) {
         event.preventDefault();
-
+        // eslint-disable-next-line
         console.log(email);
+        // eslint-disable-next-line
         console.log(password);
 
         try {
-            await axios.post("/login", {email, password});
-        } catch (e) {
-            console.log("Server error!");
+            await mongoose.post("/login", {email, password});
+        } catch (error) {
+            // eslint-disable-next-line
+            console.log(error);
         }
     }
 
@@ -52,7 +46,9 @@ function Login() {
                                 placeholder={"Password"}
                                 type={"password"}
                                 id={"password"}
-                                onChange={e => setPassword(e.target.value)}
+                                onChange={event =>
+                                    setPassword(event.target.value)
+                                }
                             />
                         </div>
                     </div>
@@ -60,8 +56,7 @@ function Login() {
                         <Button
                             className={"submit"}
                             type={"submit"}
-                            // disabled={buttonDisabled}
-                            onClick={login}>
+                            onClick={<Link to={"/gamepage"}>{login}</Link>}>
                             {"Login"}
                         </Button>
                     </div>

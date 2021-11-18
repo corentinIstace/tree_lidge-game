@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 
-const Achievments = () => (
+const Achievements = () => (
     <Container>
-        <p>{"ACHIEVMENTS"}</p>
+        <p>{"ACHIEVEMENTS"}</p>
     </Container>
 );
 
@@ -21,4 +21,5 @@ const Container = styled.div`
     width: 200px;
     height: 150px;
 `;
-export default Achievments;
+
+export default Achievements;

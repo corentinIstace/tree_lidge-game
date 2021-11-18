@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-const UserAchievments = () => (
+const UserAchievements = () => (
     <Container>
         <p>{"USER ACHIEVMENTS"}</p>
     </Container>
@@ -21,4 +21,4 @@ const Container = styled.div`
     width: 450px;
     height: 200px;
 `;
-export default UserAchievments;
+export default UserAchievements;

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Achievements from "../client/components/Achievements";
-import Succes from "../client/components/Succes";
-import UserAchievments from "../client/components/UserAchievments";
-import UserName from "../client/components/UserName";
+import Achievements from "../components/Achievements.js";
+import Succes from "../components/Succes.js";
+import UserAchievements from "../components/UserAchievements";
+import UserName from "../components/UserName.js";
 import MySvg from "../ressources/img/tree-lidge-logo-3.svg";
 
 const UserPage = () => (
@@ -17,7 +17,7 @@ const UserPage = () => (
             <Succes />
         </Middle>
         <Footer>
-            <UserAchievments />
+            <UserAchievements />
         </Footer>
     </Container>
 );
