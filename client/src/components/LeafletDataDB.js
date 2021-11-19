@@ -31,6 +31,7 @@ const InBoundersMarkups = props => {
         axios
             .post("http://localhost:5000/trees", {
                 bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
+                complete: props.zoomLevel < 19 ? false : true,
             })
             .then(response => {
                 setTrees(response.data);
@@ -38,7 +39,10 @@ const InBoundersMarkups = props => {
             })
             .catch(error => {
                 props.setLoadTrees(false); // Hide loading message
-                console.log("error", error.response.data.message ?? error);
+                console.error(
+                    "error",
+                    error.response ? error.response.data.message : error,
+                );
             });
     }, [props.Bounders]);
 

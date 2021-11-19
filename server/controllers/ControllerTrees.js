@@ -4,6 +4,10 @@ import TreeModel from "../models/TreeModel.js";
 const getTrees = async (request, response) => {
     try {
         const bounds = request.body.bounds;
+        const complete =
+            typeof request.body.complete == "boolean"
+                ? request.body.complete
+                : false;
         // Validate bounds values
         if (
             !bounds ||
@@ -18,16 +22,20 @@ const getTrees = async (request, response) => {
             });
         }
         // Find trees filtered by in bounds area
-        const Trees = await TreeModel.find({
-            geoloc: {
-                $geoWithin: {
-                    $box: [
-                        bounds.lon, // longitude first
-                        bounds.lat, // latitude
-                    ],
+        const Trees = await TreeModel.find(
+            {
+                geoloc: {
+                    $geoWithin: {
+                        $box: [
+                            bounds.lon, // longitude first
+                            bounds.lat, // latitude
+                        ],
+                    },
                 },
             },
-        });
+            // Filter fields to send according to what the client ask
+            /* complete ? "_id Geoloc Value Name IsLocked Owner_id" : "_id Geoloc", */
+        ).select(complete ? "geoloc value name isLocked owner_id" : "geoloc");
 
         // Up to client to check if array is null
         return response.status(200).json(Trees);
