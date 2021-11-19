@@ -19,9 +19,11 @@ const convertBounds = mapEvents => {
 const CenterLocatorHandler = props => {
     const mapEvents = useMapEvents({
         load: () => {
+            // When map finish loading
             props.setBoundsView(convertBounds(mapEvents));
         },
         moveend: () => {
+            // When move or zoom change on the map finish
             props.setMapCenter(mapEvents.getCenter());
             props.setBoundsView(convertBounds(mapEvents));
         },

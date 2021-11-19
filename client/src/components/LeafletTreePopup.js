@@ -5,12 +5,12 @@ const TreePopup = props => {
     const Tree = props.tree;
     return (
         <Container>
-            <h3>{Tree.name}</h3>
-            <br />
+            <h3>
+                {`${Tree.name} - ${
+                    Tree.owner ? `Owned by ${Tree.owner}` : `Free tree`
+                }`}
+            </h3>
             <p>{`Price : ${Number(Tree.value).toFixed(2) ?? "?"} Leaves`}</p>
-            <br />
-            {Tree.owner ? `Owned by ${Tree.owner}` : `Free tree`}
-            <br />
             <br />
             {
                 // If tree not owned by user, display button
