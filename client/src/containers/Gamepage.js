@@ -25,9 +25,9 @@ const Gamepage = () => {
     return (
         <GameContainer>
             <Nav>
-                <Button onClick={menu}>{"Menu"}</Button>
                 <Button onClick={logout}>{"Logout"}</Button>
                 <Button onClick={leaderBoard}>{"Leaderboard"}</Button>
+                <Button onClick={menu}>{"Menu"}</Button>
             </Nav>
             <Map
                 userTrees={userTrees}
@@ -85,7 +85,7 @@ const Button = styled.button`
     border: none;
     border: solid 1 darkblue;
     border-radius: 5px;
-    font-size: 1.5em;
+    font-size: clamp(0.8em, 4vw, 2em);
     padding: 20px;
 
     :hover {
