@@ -81,6 +81,7 @@ const Map = props => {
                     setUserTrees={props.setUserTrees}
                     userLeaves={props.userLeaves}
                     setUserLeaves={props.setUserLeaves}
+                    setLoadTrees={props.setLoadTrees}
                 />
             </MarkerClusterGroup>
         </MapContainer>

@@ -27,14 +27,17 @@ const InBoundersMarkups = props => {
     const [Trees, setTrees] = useState(null);
 
     useEffect(() => {
+        props.setLoadTrees(true); // Display loading message
         axios
             .post("http://localhost:5000/trees", {
                 bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
             })
             .then(response => {
                 setTrees(response.data);
+                props.setLoadTrees(false); // Hide loading message
             })
             .catch(error => {
+                props.setLoadTrees(false); // Hide loading message
                 console.error(error.message, error.response, error.request);
             });
     }, [props.Bounders]);
