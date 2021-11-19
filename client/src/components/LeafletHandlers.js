@@ -1,7 +1,7 @@
 import {useMapEvents} from "react-leaflet";
 
 /**
- * @returns Get bounds of the view and convert it into an array of coordinates
+ * Get bounds of the view and convert it into an array of coordinates
  */
 const convertBounds = mapEvents => {
     const currentBounds = mapEvents.getBounds();
@@ -31,4 +31,16 @@ const CenterLocatorHandler = props => {
     return null;
 };
 
-export default CenterLocatorHandler;
+/**
+ * Handler to get zoom when player change the zoom level and make it available on gamepage.
+ */
+function ZoomHandler(props) {
+    const mapEvents = useMapEvents({
+        zoomend: () => {
+            props.setZoomLevel(mapEvents.getZoom());
+        },
+    });
+    return null;
+}
+
+export {CenterLocatorHandler, ZoomHandler};

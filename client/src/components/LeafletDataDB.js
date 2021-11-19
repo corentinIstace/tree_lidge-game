@@ -1,11 +1,13 @@
-// TEMP
 import React, {useState, useEffect} from "react";
+import styled from "styled-components";
 import axios from "axios";
 import {Marker, CircleMarker, Popup} from "react-leaflet";
 import icon from "../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
-import styled from "styled-components";
 
+/**
+ * Factor to adapt sizing and positionning according to zoom level
+ */
 const Factor = zoomLevel => {
     switch (zoomLevel) {
         case 20:
@@ -30,7 +32,6 @@ const InBoundersMarkups = props => {
                 bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
             })
             .then(response => {
-                console.log(response.data);
                 setTrees(response.data);
             })
             .catch(error => {
@@ -96,10 +97,10 @@ const StyledPop = styled(Popup)`
         background-color: lightgreen;
         width: 400px;
     }
-    /* 
-.leaflet-popup-tip-container {
-    visibility: hidden;
-} */
+
+    .leaflet-popup-tip-container {
+        visibility: hidden;
+    }
 `;
 
 export default InBoundersMarkups;
