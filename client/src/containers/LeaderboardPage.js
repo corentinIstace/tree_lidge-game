@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import foret from "../ressources/img/foret.png";
+import {useNavigate} from "react-router-dom";
 
 const LeaderboardPage = () => {
+    const navigate = useNavigate();
     function closeLeaderBoard() {
-        window.location.href = "/gamepage";
+        navigate("/gamepage");
     }
 
     return (
@@ -38,8 +40,12 @@ const ButtonClose = styled.button`
     width: 24px;
     background-color: red;
     border-radius: 5px;
+    margin-top: 5px;
+    margin-right: 5px;
     :hover {
-        box-shadow: 5px 5px 5px 5px black;
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
     }
 `;
 

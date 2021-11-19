@@ -1,23 +1,25 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import Map from "../components/LeafletMap";
+import {useNavigate} from "react-router-dom";
 
 const Gamepage = () => {
+    const navigate = useNavigate();
     const [userTrees, setUserTrees] = useState(0); // number of trees owned
     const [userLeaves, setUserLeaves] = useState(5000); // Number of leaves owned
     const [loadTrees, setLoadTrees] = useState(false); // Controll display of loading message
 
     function leaderBoard() {
-        window.location.href = "/leaderboard";
+        navigate("/leaderboard");
     }
 
     function menu() {
-        window.location.href = "/homepage";
+        navigate("/homepage");
     }
 
     function logout() {
         localStorage.clear();
-        window.location.href = "/";
+        navigate("/");
     }
 
     return (

@@ -1,28 +1,52 @@
 import React from "react";
+import {useNavigate} from "react-router-dom";
 import styled from "styled-components";
 import foret from "../ressources/img/foret.png";
 
-const Homepage = () => (
-    <>
-        <Page>
-            <ContainerTitle>
-                <Title>{"Tree Lidge"}</Title>
-            </ContainerTitle>
-            <Wrapper>
-                <Tile>{"Leader board"}</Tile>
-                <Tile>{"Profile"}</Tile>
-                <Tile>{"Success"}</Tile>
-                <Tile>{"Challenges"}</Tile>
-            </Wrapper>
-        </Page>
-    </>
-);
+const Homepage = () => {
+    const navigate = useNavigate();
+    function returnGamepage() {
+        navigate("/gamepage");
+    }
+    return (
+        <>
+            <Page>
+                <ButtonClose onClick={returnGamepage}>
+                    {"Back on the game !"}
+                </ButtonClose>
+                <ContainerTitle>
+                    <Title>{"Tree Lidge"}</Title>
+                </ContainerTitle>
+                <Wrapper>
+                    <Tile>{"Leader board"}</Tile>
+                    <Tile>{"Profile"}</Tile>
+                    <Tile>{"Success"}</Tile>
+                    <Tile>{"Challenges"}</Tile>
+                </Wrapper>
+            </Page>
+        </>
+    );
+};
 
 export default Homepage;
 
 const Page = styled.div`
     background-image: url(${foret});
     padding: 40px 0px;
+`;
+const ButtonClose = styled.button`
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: red;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-left: 5px;
+    :hover {
+        box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+            rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+            rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    }
 `;
 const ContainerTitle = styled.div`
     background-color: rgba(54, 198, 96, 0.8);
