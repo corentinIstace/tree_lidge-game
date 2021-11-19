@@ -7,11 +7,25 @@ const Gamepage = () => {
     const [userLeaves, setUserLeaves] = useState(5000); // Number of leaves owned
     const [loadTrees, setLoadTrees] = useState(false); // Controll display of loading message
 
+    function leaderBoard() {
+        window.location.href = "/leaderboard";
+    }
+
+    function menu() {
+        window.location.href = "/homepage";
+    }
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = "/";
+    }
+
     return (
         <GameContainer>
             <Nav>
-                <Button>{"Menu"}</Button>
-                <Button>{"Logout"}</Button>
+                <Button onClick={menu}>{"Menu"}</Button>
+                <Button onClick={logout}>{"Logout"}</Button>
+                <Button onClick={leaderBoard}>{"Leaderboard"}</Button>
             </Nav>
             <Map
                 userTrees={userTrees}

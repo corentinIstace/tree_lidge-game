@@ -1,30 +1,32 @@
 import React, {useState} from "react";
 import styled from "styled-components";
-import {Link} from "react-router-dom";
-import mongoose from "mongoose";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
 
 function Login() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
-    async function login(event) {
-        event.preventDefault();
-        // eslint-disable-next-line
-        console.log(email);
-        // eslint-disable-next-line
-        console.log(password);
-
+    async function loginOnClick() {
+        setErrorMessage("");
         try {
-            await mongoose.post("/login", {email, password});
+            const loggedIn = await axios.post("http://localhost:5000/login", {
+                email,
+                password,
+            });
+            if (loggedIn) {
+                navigate("/gamepage");
+            }
         } catch (error) {
-            // eslint-disable-next-line
-            console.log(error);
+            setErrorMessage(error.response.data.message);
         }
     }
 
     return (
         <>
-            {/* If / else connected or not => login or register */}
+            <ErrorMessage>{errorMessage}</ErrorMessage>
             <section className={"container"}>
                 <form>
                     <div className={"field"}>
@@ -34,7 +36,7 @@ function Login() {
                                 placeholder={"Email"}
                                 type={"text"}
                                 id={"email"}
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={event => setEmail(event.target.value)}
                             />
                         </div>
                     </div>
@@ -56,7 +58,7 @@ function Login() {
                         <Button
                             className={"submit"}
                             type={"submit"}
-                            onClick={<Link to={"/gamepage"}>{login}</Link>}>
+                            onClick={loginOnClick}>
                             {"Login"}
                         </Button>
                     </div>
@@ -65,6 +67,10 @@ function Login() {
         </>
     );
 }
+
+const ErrorMessage = styled.h3`
+    color: white;
+`;
 
 const Button = styled.button`
     background-color: #82c23e;
