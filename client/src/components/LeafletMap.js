@@ -1,9 +1,8 @@
 import React, {useState} from "react";
 import {MapContainer, TileLayer} from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-markercluster";
-import InBoundersMarkups from "./LeafletLocalData";
-import ZoomHandler from "./LeafletZoomHandler";
-import CenterLocatorHandler from "./LeafletCenterViewHandler";
+import InBoundersMarkups from "./LeafletDataDB"; // Requests to server
+import {CenterLocatorHandler, ZoomHandler} from "./LeafletHandlers"; // Zoom and locator handler
 import {
     initialCenterCoordinates,
     mapLimits,
@@ -20,8 +19,8 @@ const Map = props => {
 
     // These values are necessary for the initial display, then will be overwritten by whenCreated of GameContainer
     const initialBounds = [
-        [50.64845366378443, 5.5523406982421875],
-        [50.628040512635025, 5.534191131591798],
+        [50.639476371673126, 5.572589635848999],
+        [50.63692472520001, 5.564006567001344],
     ];
 
     const [zoomLevel, setZoomLevel] = useState(18); // initial zoom level provided for MapContainer
@@ -62,35 +61,29 @@ const Map = props => {
                 }
                 url={"https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"}
             />
-            {
-                /* zoomLevel > 16 ? ( */
-                <MarkerClusterGroup
-                    /**
-                     * Documentation markercluster
-                     * https://www.npmjs.com/package/leaflet.markercluster
-                     * https://github.com/Leaflet/Leaflet.markercluster#usage
-                     */
-                    disableClusteringAtZoom={18} // Disable clsuetering and display all individual markers
-                    maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
-                    showCoverageOnHover={false} // Show area of the cluster
-                    chunkedLoading={true} // Boolean to split the addLayers processing in to small intervals so that the page *may* not freeze.
-                    spiderfyOnMaxZoom={false}>
-                    {/* Show markers linked when close to eachother */}
-                    <InBoundersMarkups
-                        zoomLevel={zoomLevel}
-                        Bounders={boundsView}
-                        userName={userName}
-                        userTrees={props.userTrees}
-                        setUserTrees={props.setUserTrees}
-                        userLeaves={props.userLeaves}
-                        setUserLeaves={props.setUserLeaves}
-                    />
-                </MarkerClusterGroup> /* 
-            ) : (
-                <MaxZoomClusters />
-            )} */
-            }
-            {/* <Rectangle bounds={mapLimits} /> // Rectangle to display map limits*/}
+            <MarkerClusterGroup
+                /**
+                 * Documentation markercluster
+                 * https://www.npmjs.com/package/leaflet.markercluster
+                 * https://github.com/Leaflet/Leaflet.markercluster#usage
+                 */
+                disableClusteringAtZoom={19} // Disable clsuetering and display all individual markers
+                maxClusterRadius={100} // Set number of cluster around eachother. Bigger value mean less cluster markers.
+                showCoverageOnHover={false} // Show area of the cluster
+                chunkedLoading={true} // Boolean to split the addLayers processing in to small intervals so that the page *may* not freeze.
+                spiderfyOnMaxZoom={false}>
+                {/* Show markers linked when close to eachother */}
+                <InBoundersMarkups
+                    zoomLevel={zoomLevel}
+                    Bounders={boundsView}
+                    userName={userName}
+                    userTrees={props.userTrees}
+                    setUserTrees={props.setUserTrees}
+                    userLeaves={props.userLeaves}
+                    setUserLeaves={props.setUserLeaves}
+                    setLoadTrees={props.setLoadTrees}
+                />
+            </MarkerClusterGroup>
         </MapContainer>
     );
 };
