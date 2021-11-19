@@ -38,7 +38,7 @@ const InBoundersMarkups = props => {
             })
             .catch(error => {
                 props.setLoadTrees(false); // Hide loading message
-                console.error(error.message, error.response, error.request);
+                console.log("error", error.response.data.message ?? error);
             });
     }, [props.Bounders]);
 
