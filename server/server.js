@@ -4,10 +4,13 @@ import dotenv from "dotenv";
 dotenv.config();
 import registerRouter from "./routes/Register.js";
 import loginRouter from "./routes/Login.js";
+import cors from "cors";
 
 const App = express();
 
 App.use(express.json());
+
+App.use(cors());
 
 App.use("/register", registerRouter);
 

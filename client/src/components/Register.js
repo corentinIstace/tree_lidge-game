@@ -1,70 +1,114 @@
-import React from "react";
+import axios from "axios";
+import React, {useState} from "react";
 import styled from "styled-components";
+import {useNavigate} from "react-router-dom";
 
-const Register = () => (
-    <section className={"container"}>
-        <form>
-            <div className={"userName"}>
-                <label htmlFor={"userName"} />
-                <div className={"control"}>
-                    <Input
-                        placeholder={"Username"}
-                        type={"text"}
-                        id={"userName"}
-                    />
-                </div>
-            </div>
-            <div className={"field"}>
-                <label htmlFor={"email"} />
-                <div className={"control"}>
-                    <Input
-                        placeholder={"Email"}
-                        type={"text"}
-                        id={
-                            "email"
-                        } /*onChange={(e) => setEmail(e.target.value)}*/
-                    />
-                </div>
-            </div>
+function Register() {
+    const navigate = useNavigate();
+    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [passwordVerify, setPasswordVerify] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    console.log(email, username, password, passwordVerify);
 
-            <div className={"field"}>
-                <label htmlFor={"password"} />
-                <div className={"control"}>
-                    <Input
-                        placeholder={"Password"}
-                        type={"password"}
-                        id={"password"}
-                        // onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-            </div>
-            <div className={"field"}>
-                <label htmlFor={"password"} />
-                <div className={"control"}>
-                    <Input
-                        placeholder={"Confirm Password"}
-                        type={"password"}
-                        id={"confirmPassword"}
-                        // onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-            </div>
+    async function registerOnClick() {
+        setErrorMessage("");
+        try {
+            const Registered = await axios.post(
+                "http://localhost:5000/register",
+                {
+                    email,
+                    username,
+                    password,
+                    passwordVerify,
+                },
+            );
+            if (Registered) {
+                navigate("/gamepage");
+            }
+        } catch (error) {
+            setErrorMessage(error.response.data.message);
+        }
+    }
 
-            <div className={"buttons"}>
-                <Button
-                    className={"submit"}
-                    type={"submit"}
-                    onClick={() => {
-                        console.log("ToDoRegister");
-                    }}>
-                    {"Register"}
-                </Button>
-            </div>
-        </form>
-    </section>
-);
+    return (
+        <>
+            <ErrorMessage>{errorMessage}</ErrorMessage>
+            <section className={"container"}>
+                <form>
+                    <div className={"field"}>
+                        <label htmlFor={"email"} />
+                        <div className={"control"}>
+                            <Input
+                                placeholder={"Email"}
+                                type={"text"}
+                                id={"email"}
+                                onChange={event => setEmail(event.target.value)}
+                            />
+                        </div>
+                    </div>
+
+                    <div className={"username"}>
+                        <label htmlFor={"username"} />
+                        <div className={"control"}>
+                            <Input
+                                placeholder={"Username"}
+                                type={"text"}
+                                id={"username"}
+                                onChange={event =>
+                                    setUsername(event.target.value)
+                                }
+                            />
+                        </div>
+                    </div>
+
+                    <div className={"field"}>
+                        <label htmlFor={"password"} />
+                        <div className={"control"}>
+                            <Input
+                                placeholder={"Password"}
+                                type={"password"}
+                                id={"password"}
+                                onChange={event =>
+                                    setPassword(event.target.value)
+                                }
+                            />
+                        </div>
+                    </div>
+                    <div className={"field"}>
+                        <label htmlFor={"passwordVerify"} />
+                        <div className={"control"}>
+                            <Input
+                                placeholder={"Confirm Password"}
+                                type={"password"}
+                                id={"passwordVerify"}
+                                onChange={event =>
+                                    setPasswordVerify(event.target.value)
+                                }
+                            />
+                        </div>
+                    </div>
+
+                    <div className={"buttons"}>
+                        <Button
+                            className={"submit"}
+                            type={"submit"}
+                            onClick={registerOnClick}>
+                            {"Register"}
+                        </Button>
+                    </div>
+                </form>
+            </section>
+        </>
+    );
+}
 
 export default Register;
+
+const ErrorMessage = styled.h3`
+    color: white;
+`;
 
 const Button = styled.button`
     background-color: #82c23e;

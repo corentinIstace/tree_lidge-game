@@ -6,11 +6,25 @@ const Gamepage = () => {
     const [userTrees, setUserTrees] = useState(0); // number of trees owned
     const [userLeaves, setUserLeaves] = useState(5000); // Number of leaves owned
 
+    function leaderBoard() {
+        window.location.href = "/leaderboard";
+    }
+
+    function menu() {
+        window.location.href = "/homepage";
+    }
+
+    function logout() {
+        localStorage.clear();
+        window.location.href = "/";
+    }
+
     return (
         <GameContainer>
             <Nav>
-                <Button>{"Menu"}</Button>
-                <Button>{"Logout"}</Button>
+                <Button onClick={menu}>{"Menu"}</Button>
+                <Button onClick={logout}>{"Logout"}</Button>
+                <Button onClick={leaderBoard}>{"Leaderboard"}</Button>
             </Nav>
             <Map
                 userTrees={userTrees}

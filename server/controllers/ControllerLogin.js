@@ -14,27 +14,33 @@ const login = async (request, response) => {
         if (!email || !password) {
             return response
                 .status(400)
-                .json({errorMessage: "Please enter all required fields."});
+                .json({message: "Please enter all required fields."});
         }
 
         const existingUser = await UserModel.findOne({UserEmail: email});
-
+        if (!existingUser) {
+            return response
+                .status(401)
+                .json({message: "Wrong email or password :("});
+        }
         if (existingUser) {
             return bcrypt.compare(
                 password,
                 existingUser.UserPasswordHash,
                 (error, result) => {
                     if (result) {
-                        return response.json("You are logged in !");
+                        return response.status(200).json({
+                            message: "You are logged in !",
+                        });
                     }
-                    return response
-                        .status(401)
-                        .json("Wrong email or password :(");
+                    return response.status(401).json({
+                        message: "Wrong email or password :(",
+                    });
                 },
             );
         }
     } catch (error) {
-        response.status(500).send("Check the terminal");
+        response.json({message: "Check the terminal"});
     }
 };
 

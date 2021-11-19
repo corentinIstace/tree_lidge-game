@@ -14,34 +14,32 @@ const register = async (request, response) => {
 
         if (!email || !username || !password || !passwordVerify) {
             return response.status(400).json({
-                errorMessage: "Please enter all required fields.",
+                message: "Please enter all required fields.",
             });
         }
 
         if (username.length < 3) {
             return response.status(400).json({
-                errorMessage:
-                    "Please enter an username of at least 3 characters.",
+                message: "Please enter an username of at least 3 characters.",
             });
         }
 
         if (password.length < 5) {
             return response.status(400).json({
-                errorMessage:
-                    "Please enter a password of at least 5 characters.",
+                message: "Please enter a password of at least 5 characters.",
             });
         }
 
         if (password !== passwordVerify) {
             return response.status(400).json({
-                errorMessage: "Please enter the same password twice.",
+                message: "Please enter the same password twice.",
             });
         }
 
         const existingUser = await UserModel.findOne({UserEmail: email});
         if (existingUser) {
             return response.status(400).json({
-                errorMessage: "An account with this email already exists.",
+                message: "An account with this email already exists.",
             });
         }
 
