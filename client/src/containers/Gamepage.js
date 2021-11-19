@@ -25,9 +25,9 @@ const Gamepage = () => {
     return (
         <GameContainer>
             <Nav>
-                <Button onClick={logout}>{"Logout"}</Button>
-                <Button onClick={leaderBoard}>{"Leaderboard"}</Button>
                 <Button onClick={menu}>{"Menu"}</Button>
+                <Button onClick={leaderBoard}>{"Leaderboard"}</Button>
+                <Button onClick={logout}>{"Logout"}</Button>
             </Nav>
             <Map
                 userTrees={userTrees}
