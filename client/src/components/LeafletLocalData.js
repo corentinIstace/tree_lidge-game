@@ -1,7 +1,6 @@
 // TEMP
-import React from "react";
-import {v4 as uuidv4} from "uuid";
-import Trees from "../ressources/data.json";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import {Marker, CircleMarker, Popup} from "react-leaflet";
 import icon from "../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
@@ -23,6 +22,22 @@ const Factor = zoomLevel => {
  * Loop over trees data and generate map markups
  */
 const InBoundersMarkups = props => {
+    const [Trees, setTrees] = useState(null);
+
+    useEffect(() => {
+        axios
+            .post("http://localhost:5000/trees", {
+                bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
+            })
+            .then(response => {
+                console.log(response.data);
+                setTrees(response.data);
+            })
+            .catch(error => {
+                console.error(error.message, error.response, error.request);
+            });
+    }, [props.Bounders]);
+
     const xSize = 9 * Factor(props.zoomLevel);
     const ySize = 45 * Factor(props.zoomLevel);
 
@@ -40,47 +55,38 @@ const InBoundersMarkups = props => {
     if (props.zoomLevel < 19) {
         return (
             <>
-                {Array.from(Trees)
-                    .filter(tree => {
-                        // Filter trees with coordinates and inside the given bounders.
-                        const bounds = Leaflet.latLngBounds(props.Bounders);
-                        return bounds.contains(tree.geoloc);
-                    })
-                    .map(tree => (
-                        // TODO use id when connected to mongoDB
-                        // eslint-disable-next-line react/jsx-key
+                {Trees ? (
+                    Array.from(Trees).map(tree => (
                         <CircleMarker
-                            /* key={tree.id} */
+                            key={tree._id}
                             color={"#00ff00"}
                             center={tree.geoloc}
                             radius={2}
                         />
-                    ))}
+                    ))
+                ) : (
+                    <div />
+                )}
             </>
         );
     }
 
     return (
         <>
-            {Array.from(Trees)
-                .filter(tree => {
-                    // Filter trees with coordinates and inside the given bounders.
-                    const bounds = Leaflet.latLngBounds(props.Bounders);
-                    return bounds.contains(tree.geoloc);
-                })
-                .map(tree => {
-                    const id = uuidv4();
-                    return (
-                        <Marker
-                            key={String(id)}
-                            position={tree.geoloc}
-                            icon={treeIcon}>
-                            <StyledPop>
-                                <TreePopup tree={tree} />
-                            </StyledPop>
-                        </Marker>
-                    );
-                })}
+            {Trees ? (
+                Array.from(Trees).map(tree => (
+                    <Marker
+                        key={tree._id}
+                        position={tree.geoloc}
+                        icon={treeIcon}>
+                        <StyledPop>
+                            <TreePopup tree={tree} />
+                        </StyledPop>
+                    </Marker>
+                ))
+            ) : (
+                <div />
+            )}
         </>
     );
 };
