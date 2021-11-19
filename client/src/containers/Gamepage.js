@@ -66,7 +66,7 @@ const GameContainer = styled.section`
  */
 const Nav = styled.nav`
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     justify-content: space-between;
     width: 90%;
     position: absolute;
