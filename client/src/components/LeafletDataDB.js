@@ -91,14 +91,16 @@ const InBoundersMarkups = props => {
         return (
             <>
                 {Trees ? (
-                    Array.from(Trees).map(tree => (
-                        <CircleMarker
-                            key={tree._id}
-                            color={"#00ff00"}
-                            center={tree.geoloc}
-                            radius={2}
-                        />
-                    ))
+                    Array.from(Trees)
+                        .filter(t => t.geoloc)
+                        .map(tree => (
+                            <CircleMarker
+                                key={tree._id}
+                                color={"#00ff00"}
+                                center={tree.geoloc}
+                                radius={2}
+                            />
+                        ))
                 ) : (
                     <div />
                 )}
@@ -109,16 +111,18 @@ const InBoundersMarkups = props => {
     return (
         <>
             {Trees ? (
-                Array.from(Trees).map(tree => (
-                    <Marker
-                        key={tree._id}
-                        position={tree.geoloc}
-                        icon={treeIcon}>
-                        <StyledPop>
-                            <TreePopup tree={tree} />
-                        </StyledPop>
-                    </Marker>
-                ))
+                Array.from(Trees)
+                    .filter(t => t.geoloc)
+                    .map(tree => (
+                        <Marker
+                            key={tree._id}
+                            position={tree.geoloc}
+                            icon={treeIcon}>
+                            <StyledPop>
+                                <TreePopup tree={tree} />
+                            </StyledPop>
+                        </Marker>
+                    ))
             ) : (
                 <div />
             )}
