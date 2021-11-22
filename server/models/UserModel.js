@@ -12,6 +12,10 @@ const UserModel = mongoose.Schema({
         type: String,
         required: true,
     },
+    UserLeaves: {
+        type: Number,
+        required: true,
+    },
 });
 
 export default mongoose.model("users", UserModel);

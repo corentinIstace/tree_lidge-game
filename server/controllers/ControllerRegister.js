@@ -43,6 +43,18 @@ const register = async (request, response) => {
             });
         }
 
+        // Calculate leaves gift
+        // If no players yet, the first get 5000 Leaves
+        // Else gift is total leaves players / players number
+        const players = await UserModel.find();
+        const leavesGift =
+            players.length > 0
+                ? players.reduce(
+                      (previous, current) => previous + current.UserLeaves,
+                      0,
+                  ) / players.length
+                : 5000;
+
         // Encrypt the password
 
         const salt = await bcrypt.genSalt();
@@ -52,6 +64,7 @@ const register = async (request, response) => {
             UserEmail: email,
             UserName: username,
             UserPasswordHash: passwordHashed,
+            UserLeaves: leavesGift,
         });
         const SavedUser = await NewUser.save();
         response.json(SavedUser);
