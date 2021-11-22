@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 import UserModel from "../models/UserModel.js";
+import Trees from "../models/TreeModel.js";
 import bcrypt from "bcrypt";
 
 // Register new user
@@ -67,8 +68,37 @@ const register = async (request, response) => {
             UserLeaves: leavesGift,
         });
         const SavedUser = await NewUser.save();
+
+        // Calculate trees gift for new player
+        // Give three random free trees
+        const freeTrees = new Array(...(await Trees.find({owner: null})));
+        const treesGift = fTrees => {
+            let local = new Array(...fTrees);
+            const res = [];
+
+            while (res.length < 3) {
+                const r = Math.floor(Math.random() * local.length);
+                res.push(local[r]);
+                // eslint-disable-next-line no-loop-func
+                local = local.filter(t => t !== local[r]);
+            }
+            return res;
+        };
+        const gift = await treesGift(freeTrees);
+
+        // Proceed to save allowed trees of the new player
+        gift.forEach(async t => {
+            if (t && t._id) {
+                await Trees.findOneAndUpdate(
+                    {_id: t._id},
+                    {owner: SavedUser._id},
+                );
+            }
+        });
+
         response.json(SavedUser);
     } catch (error) {
+        console.log(error);
         response.status(500).send("Error 500 Check your terminal");
     }
 };
