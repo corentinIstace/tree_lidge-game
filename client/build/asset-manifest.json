@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/static/js/main.439057d3.chunk.js",
+    "main.js.map": "/static/js/main.439057d3.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6bd82f7e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6bd82f7e.js.map",
+    "static/js/2.87390efc.chunk.js": "/static/js/2.87390efc.chunk.js",
+    "static/js/2.87390efc.chunk.js.map": "/static/js/2.87390efc.chunk.js.map",
+    "static/js/3.b19a1fb3.chunk.js": "/static/js/3.b19a1fb3.chunk.js",
+    "static/js/3.b19a1fb3.chunk.js.map": "/static/js/3.b19a1fb3.chunk.js.map",
+    "index.html": "/index.html",
+    "static/js/2.87390efc.chunk.js.LICENSE.txt": "/static/js/2.87390efc.chunk.js.LICENSE.txt",
+    "static/media/TreeError404.460ba643.jpg": "/static/media/TreeError404.460ba643.jpg",
+    "static/media/error404.7147f1ef.png": "/static/media/error404.7147f1ef.png",
+    "static/media/foret.f7a18a6d.png": "/static/media/foret.f7a18a6d.png",
+    "static/media/jean-victor-balin-tree.822b314c.svg": "/static/media/jean-victor-balin-tree.822b314c.svg",
+    "static/media/tree-lidge-logo-3.e083922d.svg": "/static/media/tree-lidge-logo-3.e083922d.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6bd82f7e.js",
+    "static/js/2.87390efc.chunk.js",
+    "static/js/main.439057d3.chunk.js"
+  ]
+}
