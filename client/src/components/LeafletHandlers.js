@@ -20,10 +20,12 @@ const CenterLocatorHandler = props => {
     const mapEvents = useMapEvents({
         load: () => {
             // When map finish loading
+            // set current view bounds
             props.setBoundsView(convertBounds(mapEvents));
         },
         moveend: () => {
             // When move or zoom change on the map finish
+            // Set the new center coordinates and set current view bounds
             props.setMapCenter(mapEvents.getCenter());
             props.setBoundsView(convertBounds(mapEvents));
         },

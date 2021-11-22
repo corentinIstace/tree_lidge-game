@@ -23,10 +23,11 @@ const Map = props => {
         [50.63692472520001, 5.564006567001344],
     ];
 
-    const [zoomLevel, setZoomLevel] = useState(18); // initial zoom level provided for MapContainer
+    const [zoomLevel, setZoomLevel] = useState(19); // initial zoom level provided for MapContainer
     const [mapCenter, setMapCenter] = useState(initialCenterCoordinates); // set center of the map view
     const [boundsView, setBoundsView] = useState(initialBounds); // set bounds of the map view (user screen)
     const [userName] = useState("Bertrand"); // TODO remove for global username variable
+    const [MyMap, setMap] = useState(null);
 
     return (
         <MapContainer
@@ -37,6 +38,7 @@ const Map = props => {
             scrollWheelZoom={false}
             preferCanvas={true}
             whenCreated={map => {
+                setMap(map);
                 // Update bounds when map is loaded
                 const bounds = map.getBounds();
                 setBoundsView([
@@ -82,6 +84,7 @@ const Map = props => {
                     userLeaves={props.userLeaves}
                     setUserLeaves={props.setUserLeaves}
                     setLoadTrees={props.setLoadTrees}
+                    MyMap={MyMap}
                 />
             </MarkerClusterGroup>
         </MapContainer>

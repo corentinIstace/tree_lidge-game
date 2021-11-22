@@ -20,6 +20,9 @@ const Factor = zoomLevel => {
     }
 };
 
+// Handle timout between requests
+let requestWithTimout;
+
 /**
  * Loop over trees data and generate map markups
  */
@@ -28,22 +31,46 @@ const InBoundersMarkups = props => {
 
     useEffect(() => {
         props.setLoadTrees(true); // Display loading message
-        axios
-            .post("http://localhost:5000/trees", {
-                bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
-                complete: props.zoomLevel < 19 ? false : true,
-            })
-            .then(response => {
-                setTrees(response.data);
-                props.setLoadTrees(false); // Hide loading message
-            })
-            .catch(error => {
-                props.setLoadTrees(false); // Hide loading message
-                console.error(
-                    "error",
-                    error.response ? error.response.data.message : error,
-                );
-            });
+
+        // Handle timout between requests
+        if (requestWithTimout) {
+            clearTimeout(requestWithTimout);
+        }
+        requestWithTimout = setTimeout(() => {
+            axios
+                .post("http://localhost:5000/trees", {
+                    bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
+                    complete: props.zoomLevel < 19 ? false : true,
+                })
+                .then(response => {
+                    console.log(props.userName, response.data);
+                    props.setLoadTrees(false); // Hide loading message
+
+                    /* if (!response.data.filter) {
+                        console.log("test");
+                        return [response.data];
+                    }
+                    console.log("display only geoloc");
+                    return response.data.filter(t => t.geoloc); */
+                    return response.data;
+                })
+                .then(trees => {
+                    setTrees(trees);
+                })
+                .catch(error => {
+                    props.setLoadTrees(false); // Hide loading message
+                    console.error(
+                        "error",
+                        error.response ? error.response.data.message : error,
+                    );
+                });
+            requestWithTimout = null;
+        }, 1000);
+
+        // Detect if a tree popup is open and close it before processing request.
+        if (props.MyMap) {
+            props.MyMap.closePopup();
+        }
     }, [props.Bounders]);
 
     const xSize = 9 * Factor(props.zoomLevel);
@@ -64,14 +91,16 @@ const InBoundersMarkups = props => {
         return (
             <>
                 {Trees ? (
-                    Array.from(Trees).map(tree => (
-                        <CircleMarker
-                            key={tree._id}
-                            color={"#00ff00"}
-                            center={tree.geoloc}
-                            radius={2}
-                        />
-                    ))
+                    Array.from(Trees)
+                        .filter(t => t.geoloc)
+                        .map(tree => (
+                            <CircleMarker
+                                key={tree._id}
+                                color={"#00ff00"}
+                                center={tree.geoloc}
+                                radius={2}
+                            />
+                        ))
                 ) : (
                     <div />
                 )}
@@ -82,16 +111,18 @@ const InBoundersMarkups = props => {
     return (
         <>
             {Trees ? (
-                Array.from(Trees).map(tree => (
-                    <Marker
-                        key={tree._id}
-                        position={tree.geoloc}
-                        icon={treeIcon}>
-                        <StyledPop>
-                            <TreePopup tree={tree} />
-                        </StyledPop>
-                    </Marker>
-                ))
+                Array.from(Trees)
+                    .filter(t => t.geoloc)
+                    .map(tree => (
+                        <Marker
+                            key={tree._id}
+                            position={tree.geoloc}
+                            icon={treeIcon}>
+                            <StyledPop>
+                                <TreePopup tree={tree} />
+                            </StyledPop>
+                        </Marker>
+                    ))
             ) : (
                 <div />
             )}

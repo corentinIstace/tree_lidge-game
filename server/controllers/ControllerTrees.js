@@ -1,4 +1,4 @@
-import TreeModel from "../models/TreeModel.js";
+import Trees from "../models/TreeModel.js";
 
 // Get trees from bounds
 const getTrees = async (request, response) => {
@@ -22,24 +22,35 @@ const getTrees = async (request, response) => {
             });
         }
         // Find trees filtered by in bounds area
-        const Trees = await TreeModel.find(
-            {
-                geoloc: {
-                    $geoWithin: {
-                        $box: [
-                            bounds.lon, // longitude first
-                            bounds.lat, // latitude
-                        ],
-                    },
+        return await Trees.find({
+            geoloc: {
+                $geoWithin: {
+                    $box: [
+                        bounds.lon, // longitude first
+                        bounds.lat, // latitude
+                    ],
                 },
             },
+        })
+            .populate({
+                path: "owner",
+                select: "UserName -_id",
+                model: "users",
+            })
             // Filter fields to send according to what the client ask
-            /* complete ? "_id Geoloc Value Name IsLocked Owner_id" : "_id Geoloc", */
-        ).select(complete ? "geoloc value name isLocked owner_id" : "geoloc");
-
-        // Up to client to check if array is null
-        return response.status(200).json(Trees);
+            .select(
+                complete
+                    ? "_id geoloc value name isLocked owner"
+                    : "_id geoloc -owner",
+            )
+            .exec((err, data) => {
+                if (err) {
+                    throw err;
+                }
+                return response.status(200).json(data);
+            });
     } catch (error) {
+        console.log(error);
         return response.status(500).json({message: "Could not retrieve trees"});
     }
 };

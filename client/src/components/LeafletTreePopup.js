@@ -5,16 +5,17 @@ const TreePopup = props => {
     const Tree = props.tree;
     return (
         <Container>
-            <h3>
-                {`${Tree.name} - ${
-                    Tree.owner ? `Owned by ${Tree.owner}` : `Free tree`
-                }`}
-            </h3>
+            <h2>{`${Tree.name}`}</h2>
+            <h4>
+                {Tree.owner ? `Owned by ${Tree.owner.UserName}` : `Free tree`}
+            </h4>
             <p>{`Price : ${Number(Tree.value).toFixed(2) ?? "?"} Leaves`}</p>
             <br />
             {
                 // If tree not owned by user, display button
-                Tree.owner !== props.userName && !Tree.isLocked ? (
+                (String(Tree.owner) !== String(props.userName) &&
+                    String(Tree.isLocked).toLowerCase() === "false") ||
+                !Tree.id_owner ? (
                     <MyButton
                         type={"button"}
                         onClick={() => {
@@ -24,13 +25,14 @@ const TreePopup = props => {
                         {"Buy tree"}
                     </MyButton>
                 ) : // If not owned but locked
-                Tree.owner !== props.userName && Tree.isLocked ? (
+                Tree.owner !== props.userName &&
+                  String(Tree.isLocked).toLowerCase() === "true" ? (
                     "Locked"
                 ) : (
                     <MyButton
                         type={"button"}
                         onClick={() => {
-                            // TODO db request buying tree
+                            // TODO db request lock tree
                             console.log("Lock tree", Tree.name);
                         }}>
                         {"Lock tree"}
