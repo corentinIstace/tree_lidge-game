@@ -22,6 +22,6 @@ App.use("/login", loginRouter);
 App.use("/trees", treesRouter);
 
 // eslint-disable-next-line no-console
-mongoose.connect(process.env.DB_CONNECTION, () => console.log("Connected"));
+mongoose.connect(process.env.DB_CONNECTION);
 
 App.listen(PORT);
