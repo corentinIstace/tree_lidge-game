@@ -9,7 +9,11 @@ const TreePopup = props => {
             <h4>
                 {Tree.owner ? `Owned by ${Tree.owner.UserName}` : `Free tree`}
             </h4>
-            <p>{`Price : ${Number(Tree.value).toFixed(2) ?? "?"} Leaves`}</p>
+            <p>
+                {`Price : ${
+                    Tree.value ? Number(Tree.value).toFixed(2) : "?"
+                } Leaves`}
+            </p>
             <br />
             {
                 // If tree not owned by user, display button

@@ -7,6 +7,8 @@ import loginRouter from "./routes/Login.js";
 import cors from "cors";
 import treesRouter from "./routes/Trees.js";
 
+const PORT = process.env.PORT || 5000;
+
 const App = express();
 
 App.use(express.json());
@@ -22,4 +24,4 @@ App.use("/trees", treesRouter);
 // eslint-disable-next-line no-console
 mongoose.connect(process.env.DB_CONNECTION, () => console.log("Connected"));
 
-App.listen(5000);
+App.listen(PORT);

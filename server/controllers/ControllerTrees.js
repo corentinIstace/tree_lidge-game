@@ -1,4 +1,5 @@
 import Trees from "../models/TreeModel.js";
+/* import UserModel from "../models/UserModel.js"; */
 
 // Get trees from bounds
 const getTrees = async (request, response) => {
@@ -47,6 +48,34 @@ const getTrees = async (request, response) => {
                 if (err) {
                     throw err;
                 }
+
+                // Test
+                // ----
+                // TODO player payement and leaves halfing
+
+                // Cannot get value of trees, receive undefined
+
+                /* UserModel.find().then(players => {
+                    players.forEach(async player => {
+                        const playerTrees = await Trees.find({
+                            owner: player._id,
+                        });
+                        console.log("controll", player.UserName, playerTrees);
+                        const paye = await playerTrees.reduce(
+                            (previous, current) => {
+                                console.log(
+                                    "tree",
+                                    current._id, // get correct value
+                                    current.isLocked, // get undefined
+                                );
+                                return previous + current.value;
+                            },
+                            0,
+                        );
+                        console.log("player", player.UserName, "get", paye);
+                    });
+                }); */
+
                 return response.status(200).json(data);
             });
     } catch (error) {
