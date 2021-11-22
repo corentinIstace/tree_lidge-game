@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {ObjectId} from "mongodb";
+const Schema = mongoose.Schema;
 
 const TreeModel = mongoose.Schema({
     Geoloc: {
@@ -24,10 +24,11 @@ const TreeModel = mongoose.Schema({
         type: Boolean,
         required: true,
     },
-    Owner_id: {
-        type: ObjectId,
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "users",
         required: false,
     },
 });
 
-export default mongoose.model("trees", TreeModel);
+export default mongoose.model("tree", TreeModel, "trees");
