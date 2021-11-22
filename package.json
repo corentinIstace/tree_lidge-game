@@ -27,7 +27,6 @@
     "axios": "^0.24.0",
     "concurrently": "^6.4.0",
     "cors": "^2.8.5",
-    "mongoose": "^6.0.13",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
