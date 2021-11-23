@@ -26,6 +26,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // eslint-disable-next-line no-console
-mongoose.connect(process.env.DB_CONNECTION);
+mongoose.connect(
+    process.env.DB_CONNECTION,
+    console.log(`Connected on ${PORT}`),
+);
 
 App.listen(PORT);
