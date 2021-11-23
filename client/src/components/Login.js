@@ -2,7 +2,9 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import HerokuUrl from "../HerokuUrl";
+//import HerokuUrl from "../HerokuUrl";
+
+const SERVER_PORT = process.env.SERVER_PORT || 5000;
 
 function Login() {
     const navigate = useNavigate();
@@ -13,10 +15,13 @@ function Login() {
     async function loginOnClick() {
         setErrorMessage("");
         try {
-            const loggedIn = await axios.post(`${HerokuUrl}/login`, {
-                email,
-                password,
-            });
+            const loggedIn = await axios.post(
+                `https://treelidgegame.herokuapp.com:${SERVER_PORT}/login`,
+                {
+                    email,
+                    password,
+                },
+            );
             if (loggedIn) {
                 navigate("/gamepage");
             }
