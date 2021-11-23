@@ -6,6 +6,7 @@ import registerRouter from "./routes/Register.js";
 import loginRouter from "./routes/Login.js";
 import cors from "cors";
 import treesRouter from "./routes/Trees.js";
+import path from "path";
 
 const PORT = process.env.PORT || 5000;
 
@@ -21,10 +22,11 @@ App.use("/login", loginRouter);
 
 App.use("/trees", treesRouter);
 
-App.get("/*", (req, res) => res.send("Index Page"));
-
 if (process.env.NODE_ENV === "production") {
     App.use(express.static("../client/build"));
+    App.get("/*", (request, response) => {
+        response.sendFile(path.join(__dirname, "../client/build/index.html"));
+    });
 }
 
 // eslint-disable-next-line no-console
