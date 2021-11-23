@@ -2,6 +2,7 @@ import axios from "axios";
 import React, {useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
+import {URL} from "./URL";
 
 function Register() {
     const navigate = useNavigate();
@@ -15,15 +16,12 @@ function Register() {
     async function registerOnClick() {
         setErrorMessage("");
         try {
-            const Registered = await axios.post(
-                "http://localhost:5000/register",
-                {
-                    email,
-                    username,
-                    password,
-                    passwordVerify,
-                },
-            );
+            const Registered = await axios.post(`${URL}/register`, {
+                email,
+                username,
+                password,
+                passwordVerify,
+            });
             if (Registered) {
                 navigate("/gamepage");
             }

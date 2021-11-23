@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
+import {URL} from "./URL";
 
 function Login() {
     const navigate = useNavigate();
@@ -12,7 +13,7 @@ function Login() {
     async function loginOnClick() {
         setErrorMessage("");
         try {
-            const loggedIn = await axios.post("http://localhost:5000/login", {
+            const loggedIn = await axios.post(`${URL}/login`, {
                 email,
                 password,
             });

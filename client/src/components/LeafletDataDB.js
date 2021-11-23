@@ -4,6 +4,7 @@ import axios from "axios";
 import {Marker, CircleMarker, Popup} from "react-leaflet";
 import icon from "../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
+import {URL} from "./URL.js";
 
 /**
  * Factor to adapt sizing and positionning according to zoom level
@@ -38,7 +39,7 @@ const InBoundersMarkups = props => {
         }
         requestWithTimout = setTimeout(() => {
             axios
-                .post("http://localhost:5000/trees", {
+                .post(`${URL}/trees`, {
                     bounds: {lon: props.Bounders[1], lat: props.Bounders[0]},
                     complete: props.zoomLevel < 19 ? false : true,
                 })
