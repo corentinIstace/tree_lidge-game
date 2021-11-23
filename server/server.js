@@ -21,6 +21,10 @@ App.use("/login", loginRouter);
 
 App.use("/trees", treesRouter);
 
+if (process.env.NODE_ENV === "production") {
+    App.use(express.static("../client/build"));
+}
+
 // eslint-disable-next-line no-console
 mongoose.connect(process.env.DB_CONNECTION);
 
