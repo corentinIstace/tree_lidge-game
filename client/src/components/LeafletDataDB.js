@@ -4,7 +4,7 @@ import axios from "axios";
 import {Marker, CircleMarker, Popup} from "react-leaflet";
 import icon from "../ressources/img/jean-victor-balin-tree.svg";
 import TreePopup from "./LeafletTreePopup";
-import {HerokuUrl} from "../HerokuUrl.js";
+import HerokuUrl from "../HerokuUrl.js";
 
 /**
  * Factor to adapt sizing and positionning according to zoom level

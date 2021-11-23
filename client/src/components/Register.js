@@ -2,7 +2,7 @@ import axios from "axios";
 import React, {useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
-import {HerokuUrl} from "../HerokuUrl";
+import HerokuUrl from "../HerokuUrl";
 
 function Register() {
     const navigate = useNavigate();
