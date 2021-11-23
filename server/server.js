@@ -21,6 +21,8 @@ App.use("/login", loginRouter);
 
 App.use("/trees", treesRouter);
 
+App.get("/*", (req, res) => res.send("Index Page"));
+
 if (process.env.NODE_ENV === "production") {
     App.use(express.static("../client/build"));
 }
