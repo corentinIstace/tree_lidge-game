@@ -11,7 +11,6 @@ function Register() {
     const [password, setPassword] = useState("");
     const [passwordVerify, setPasswordVerify] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    console.log(email, username, password, passwordVerify);
 
     async function registerOnClick() {
         setErrorMessage("");
