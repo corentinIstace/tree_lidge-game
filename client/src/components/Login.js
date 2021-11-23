@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import {URL} from "./URL";
+import {HerokuUrl} from "../HerokuUrl";
 
 function Login() {
     const navigate = useNavigate();
@@ -13,7 +13,7 @@ function Login() {
     async function loginOnClick() {
         setErrorMessage("");
         try {
-            const loggedIn = await axios.post(`${URL}/login`, {
+            const loggedIn = await axios.post(`${HerokuUrl}/login`, {
                 email,
                 password,
             });
